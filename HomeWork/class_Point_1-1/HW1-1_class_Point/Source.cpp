@@ -78,6 +78,5 @@ void main()
    B.moveRight( 30 );
 
    A.showCordinatesOnConsole();
-   B.showCordinatesOnConsole();
-   
+   B.showCordinatesOnConsole();   
 }
