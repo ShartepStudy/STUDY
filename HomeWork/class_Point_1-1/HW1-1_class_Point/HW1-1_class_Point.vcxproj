@@ -14,6 +14,7 @@
     <ProjectGuid>{F385FF12-7446-415C-90B1-3217973EA7BB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HW11_class_Point</RootNamespace>
+    <ProjectName>class_Point_1-1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
