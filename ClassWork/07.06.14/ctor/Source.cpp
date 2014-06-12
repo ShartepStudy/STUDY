@@ -24,7 +24,6 @@ public:
    }
    ~CHuman() 
    {
-      cout << mName << " destroy! " << endl;
       if (mName) delete[] mName;
    }
    void setAge(int age) { mAge = age>0 && age<100 ? age : 18; }
@@ -41,6 +40,12 @@ public:
 	const char * getName() { return mName; }
 };
 
+CHuman & makeHuman()
+{
+   CHuman test("TestChel", 58);
+   return test;
+}
+
 void main()
 {
    CHuman ar[] = {
@@ -53,4 +58,13 @@ void main()
    cout << ar[0].getName() << endl;
    cout << ar[1].getName() << endl;
 
+   CHuman * ptr = new CHuman;
+   delete ptr;
+   ptr = new CHuman("Gena", 24);
+   delete ptr;
+   ptr = new CHuman[5];
+   delete[] ptr;
+
+   CHuman x = makeHuman();
+   cout << x.getName() << endl;
 }
