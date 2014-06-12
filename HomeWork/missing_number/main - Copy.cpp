@@ -1,7 +1,6 @@
 #include<iostream>
 #include<time.h>
 #include<string>
-#include<vector>
 using namespace std;
 
 int getN(string & str)
@@ -19,27 +18,16 @@ int getN(string & str)
 int O(string & str)
 {
    int N = getN(str);
-//   str.push_back(',');
-   str.replace(str.find_first_of(':'), 1, 1, ',');
-
-   vector<bool> * vec = new vector<bool>(N+1);
-
-   unsigned int b=0, e=0;
-   b = str.find_first_of(',');
-
-   while ((e = str.find_first_of(',', b+1)) != string::npos)
-   {
-      string digit = str.substr( b+1, e-b-1 );
-      vec->at(atoi(digit.c_str())) = true;
-      b = e;
-   }
-   string digit = str.substr( b+1 );
-   vec->at(atoi(digit.c_str())) = true;
-
+   str.push_back(',');
+   str.insert(str.begin()+str.find_first_of(':')+1, ',');
+   
    int i;
+   char t[10];
    for( i=1; i<=N ; i++ )
    {
-      if (!vec->at(i)) 
+      string digit(",,");
+      digit.insert(1, _itoa(i, t, 10));
+      if (str.find(digit)==string::npos) 
          break;
    }
 
@@ -48,14 +36,14 @@ int O(string & str)
 
 int main() 
 {
-//   string & iStr = new string("BMC_TEST_INPUT_MAGIC");
+//   string * iStr = new string("BMC_TEST_INPUT_MAGIC");
 //   char * input = "35:1,22,3,33,2,23,28,4,24,5,6,25,8,7,34,26,9,27,10,11,30,12,29,13,31,14,15,32,16,17,18,19,20,21";
-//   string & iStr = new string(input);
+//   string * iStr = new string(input);
    
 //---------   
    srand((int)time(NULL));
 
-   const int N=10000000;
+   const int N=10000;
    
    int * arr = new int[N];
    for (int i=0; i<N; i++)
@@ -69,7 +57,7 @@ int main()
    }
 
    char t[10];
-   string * iStr = new string(_itoa(N,t,10));
+   string *iStr = new string(_itoa(N,t,10));
    iStr->push_back(':');
    for (int i=0; i<N-2; i++)
    {
@@ -82,7 +70,6 @@ int main()
 
    cout << "Start work" << endl;
    int result = O(*iStr);
-   delete iStr;
    cout << result << endl;
    return result;
 }
