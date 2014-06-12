@@ -1,3 +1,4 @@
+#include<stdlib.h>
 #include<iostream>
 #include<time.h>
 #include<string>
@@ -19,13 +20,17 @@ int getN(string & str)
 int O(string & str)
 {
    int N = getN(str);
-//   str.push_back(',');
-   str.replace(str.find_first_of(':'), 1, 1, ',');
+   
+   if (N<1 || N>10000000)
+   {
+      cout << -1 << endl;
+      exit( -1 );
+   }
 
    vector<bool> * vec = new vector<bool>(N+1);
 
    unsigned int b=0, e=0;
-   b = str.find_first_of(',');
+   b = str.find_first_of(':');
 
    while ((e = str.find_first_of(',', b+1)) != string::npos)
    {
@@ -34,15 +39,20 @@ int O(string & str)
       b = e;
    }
    string digit = str.substr( b+1 );
-   vec->at(atoi(digit.c_str())) = true;
+
+   b = atoi( digit.c_str() );
+   if (b<1 || b>N)
+   {
+      cout << -1 << endl;
+      exit( -1 );
+   }
+
+   vec->at(b) = true;
 
    int i;
    for( i=1; i<=N ; i++ )
-   {
-      if (!vec->at(i)) 
-         break;
-   }
-
+      if (!vec->at(i)) break;
+   
    return i>N ? -1 : i;
 }
 
@@ -55,16 +65,17 @@ int main()
 //---------   
    srand((int)time(NULL));
 
-   const int N=10000000;
+   const int N=1000;
    
    int * arr = new int[N];
    for (int i=0; i<N; i++)
       arr[i] = i+1;
    for (int i=0; i<N; i++)
    {
-      int j=rand()%N;
-      int buf = arr[i];
-      arr[i] = arr[j];
+      int j = rand()%N;
+      int k = rand()%N;
+      int buf = arr[k];
+      arr[k] = arr[j];
       arr[j] = buf;
    }
 
