@@ -33,4 +33,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="manNames.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="manSecondNames.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="womenNames.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="womenSecondNames.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="womenFamily.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="menFamily.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

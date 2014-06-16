@@ -60,6 +60,22 @@ short CStudent::getZachetMark( short index ) { return mZachet[index]; }
 short CStudent::getCourseworkMark( short index ) { return mCoursework[index]; }
 short CStudent::getExamMark( short index ) { return mExam[index]; }
 
+int CStudent::getRating()
+{
+   int rating = 0;
+
+   for (int i = 0; i < mZachet.size(); i++)
+      rating += mZachet[i];
+
+   for (int i = 0; i < mCoursework.size(); i++)
+      rating += mCoursework[i];
+
+   for (int i = 0; i < mExam.size(); i++)
+      rating += mExam[i];
+   
+   return rating;
+}
+
 void CStudent::setFamilyName( string familyName ) { mFamilyName = familyName; }
 void CStudent::setName( string name ) { mName = name; }
 void CStudent::setSecondName( string secondName ) { mSecondName = secondName; }
@@ -85,4 +101,9 @@ void CStudent::getAutoExam() { mExam.push_back( BEST_MARK ); }
 void CStudent::oversleepZachet() { mZachet.push_back( WORST_MARK ); }
 void CStudent::oversleepCoursework() { mCoursework.push_back( WORST_MARK ); }
 void CStudent::oversleepExam() { mExam.push_back( WORST_MARK ); }
+
+bool CStudent::isPassSession()
+{
+   return getRating() > RATING_FOR_PASS_SESSION;
+}
 

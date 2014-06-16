@@ -24,6 +24,9 @@ private:
          return (s1.getFamilyName()<s2.getFamilyName());
       }
    } sortFamilyName;
+
+   void initGroup( int count );
+   void removeStudent( int index );  
 public:
    CGroup();
    CGroup(int size);
@@ -31,7 +34,7 @@ public:
    CGroup( CGroup & group );
 
    void showGroup();
-   void addStudent( CStudent student );
+   void addStudent( CStudent & student );
    CStudent & editStudent( int index );
 
    void setGroupName( string name );

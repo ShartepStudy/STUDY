@@ -8,6 +8,7 @@ using namespace std;
 
 const short BEST_MARK = 5;
 const short WORST_MARK = 2;
+const short RATING_FOR_PASS_SESSION = 2;
 
 class CStudent
 {
@@ -40,6 +41,7 @@ public:
    short getZachetMark( short index );
    short getCourseworkMark( short index );
    short getExamMark( short index );
+   int getRating();
 
    void setFamilyName( string  familyName );
    void setName( string name );
@@ -66,6 +68,8 @@ public:
    void oversleepZachet();
    void oversleepCoursework();
    void oversleepExam();
+
+   bool isPassSession();
 };
 
 #endif

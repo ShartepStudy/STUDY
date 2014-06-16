@@ -84,6 +84,14 @@
     <ClInclude Include="Group.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="manNames.txt" />
+    <Text Include="manSecondNames.txt" />
+    <Text Include="menFamily.txt" />
+    <Text Include="womenFamily.txt" />
+    <Text Include="womenNames.txt" />
+    <Text Include="womenSecondNames.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
