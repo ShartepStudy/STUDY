@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F385FF12-7446-415C-90B1-3217973EA7BB}</ProjectGuid>
+    <ProjectGuid>{608DB050-6FB2-41AE-9E9A-5DEEF50DCD7B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>HW11_class_Point</RootNamespace>
-    <ProjectName>class_Point_1-1</ProjectName>
+    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <ProjectName>H-cppFiles</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,12 +77,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C_Point.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cPoint.h" />
-    <ClInclude Include="C_Point.h" />
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
