@@ -175,7 +175,6 @@ CFraction CFraction::operator/(int rValue)
    return tmp;
 }
 
-
 CFraction operator/(int lValue, const CFraction & rValue)
 {
    CFraction tmp;
@@ -184,6 +183,56 @@ CFraction operator/(int lValue, const CFraction & rValue)
    tmp.reduce();
    return tmp;
 }
+
+CFraction & CFraction::operator=(const CFraction & rValue)
+{
+   mCh = rValue.mCh;
+   mZn = rValue.mZn;
+   reduce();
+   return *this;
+}
+
+CFraction & CFraction::operator=(int rValue)
+{
+   mCh = rValue;
+   mZn = 1;
+   reduce();
+   return *this;
+}
+
+bool CFraction::operator==(const CFraction & rValue)
+{
+   return mCh*rValue.mZn == rValue.mCh*mZn;
+}
+
+bool CFraction::operator!=(const CFraction & rValue)
+{
+   return mCh*rValue.mZn != rValue.mCh*mZn;
+}
+
+bool CFraction::operator<(const CFraction & rValue)
+{
+   return mCh*rValue.mZn < rValue.mCh*mZn;
+}
+
+bool CFraction::operator>(const CFraction & rValue)
+{
+   return mCh*rValue.mZn > rValue.mCh*mZn;
+}
+
+bool CFraction::operator<=(const CFraction & rValue)
+{
+   return mCh*rValue.mZn <= rValue.mCh*mZn;
+}
+
+bool CFraction::operator>=(const CFraction & rValue)
+{
+   return mCh*rValue.mZn >= rValue.mCh*mZn;
+}
+
+
+
+
 
 
 

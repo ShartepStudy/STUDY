@@ -40,7 +40,15 @@ public:
    CFraction operator/(int rValue);
    friend CFraction operator/(int lValue, const CFraction & rValue);
 
+   CFraction & operator=(const CFraction & rValue);
+   CFraction & operator=(int rValue);
 
+   bool operator==(const CFraction & rValue);
+   bool operator!=(const CFraction & rValue);
+   bool operator<(const CFraction & rValue);
+   bool operator>(const CFraction & rValue);
+   bool operator<=(const CFraction & rValue);
+   bool operator>=(const CFraction & rValue);
 };
 
 
