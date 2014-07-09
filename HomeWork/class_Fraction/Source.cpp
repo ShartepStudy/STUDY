@@ -32,8 +32,5 @@ void main( )
    c.print( );
    c.print();
 
-   //cout << c;
 
-   //cin >> d;
-   //cout << d;
 }
