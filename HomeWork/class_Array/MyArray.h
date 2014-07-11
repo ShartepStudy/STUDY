@@ -1,9 +1,16 @@
 #pragma once
+
+#include <iostream>
+using namespace std;
+
+const unsigned int ALLOCATED_STEP = 10;
+
 class CMyArray
 {
 private:
-   int * mArray;
+   unsigned int mAllocatedSize;
    unsigned int mSize;
+   int * mArray;
 public:
    CMyArray();
    CMyArray(int size);
@@ -11,10 +18,10 @@ public:
    ~CMyArray();
 public:
    // изменение количества элементов.при этом существующие элементы не должны быть уничтожены 
-   bool resize( int size );   
+   void resize( unsigned int size );   
    
    // добавление элемента в конец массива 
-   bool pushBack( int data ); 
+   void pushBack( int data ); 
    
    // удаление элемента из конца массива
    int popBack();             
@@ -23,16 +30,16 @@ public:
    void clear();       
 
    // проверка на вхождение элемента в массив. в результате работы возвращает индекс первого найденного элемента. eсли ничего не найдено, возвращает -1.
-   int getIndexOf( int data ); 
+   int getIndexOf( int data );
 
    // проверка на вхождение элемента в массив. в результате работы возвращает индекс первого найденного элемента. eсли ничего не найдено, возвращает -1.
    int getLastIndexOf( int data );
 
    // вставка элемента в массив по указанному индексу
-   void insert( int index, int data );
+   void insert( unsigned int index, int data );
 
    // удаление элемента из массива по указанному индексу
-   void removeAt( int index );
+   void removeAt( unsigned int index );
 
    // изменение порядка элементов в массиве на противоположный
    void reverse();
@@ -44,8 +51,8 @@ public:
    void shuffle();
 
 public:
-   bool operator==(const CMyArray & rValue);
+   bool operator==( const CMyArray & rValue );
    void operator()();                        // повторная инициализация элементов массива
-   void operator[]( int index );
+   int & operator[]( unsigned int index );
 };
 
