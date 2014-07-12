@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{73854FFC-1784-40BD-908C-8087CD111414}</ProjectGuid>
+    <ProjectGuid>{96DD8ECA-FFDB-43A7-9880-4BF5BAAF8423}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>reload_operators</RootNamespace>
+    <RootNamespace>class_myPtr</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,8 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="overload()[].cpp" />
-    <ClCompile Include="Source.cpp" />
+    <Text Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
