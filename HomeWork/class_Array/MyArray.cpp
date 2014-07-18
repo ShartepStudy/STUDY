@@ -1,46 +1,51 @@
 #include "MyArray.h"
 
-CMyArray::CMyArray()
+template<typename T> 
+CMyArray<T>::CMyArray()
    : mAllocatedSize( ALLOCATED_STEP )
    , mSize( 0 )
-   , mArray( new int[mAllocatedSize] )
+   , mArray( new T[mAllocatedSize] )
 {
    for (size_t i = 0; i < mAllocatedSize; i++)
       mArray[i] = 0;
 }
 
-CMyArray::CMyArray( int size )
+template<typename T>
+CMyArray<T>::CMyArray( unsigned int size )
    : mAllocatedSize( size )
    , mSize( 0 )
-   , mArray( new int[mAllocatedSize] )
+   , mArray( new T[mAllocatedSize] )
 {
    for (size_t i = 0; i < mAllocatedSize; i++)
       mArray[i] = 0;
 }
 
-CMyArray::CMyArray( const CMyArray & obj )
-   : mAllocatedSize( obj.mAllocatedSize )
-   , mSize( obj.mSize )
-   , mArray( new int[mAllocatedSize] )
-{
-   for (size_t i = 0; i < mSize; i++)
-      mArray[i] = obj.mArray[i];
-   for (size_t i = mSize; i < mAllocatedSize; i++)
-      mArray[i] = 0;
-}
+//template<typename T>
+//CMyArray<T>::CMyArray( const CMyArray & obj )
+//   : mAllocatedSize( obj.mAllocatedSize )
+//   , mSize( obj.mSize )
+//   , mArray( new T[mAllocatedSize] )
+//{
+//   for (size_t i = 0; i < mSize; i++)
+//      mArray[i] = obj.mArray[i];
+//   for (size_t i = mSize; i < mAllocatedSize; i++)
+//      mArray[i] = 0;
+//}
 
-CMyArray::~CMyArray()
+template<typename T>
+CMyArray<T>::~CMyArray()
 {
    delete[] mArray;
 }
 
-void CMyArray::resize( unsigned int size )
+template<typename T>
+void CMyArray<T>::resize( unsigned int size )
 {
    if (!size) size = 1;
    
    mAllocatedSize = size;
 
-   int * tmpArray = new int[mAllocatedSize];
+   int * tmpArray = new T[mAllocatedSize];
    for (size_t i = 0; i < mSize; i++)
       tmpArray[i] = mArray[i];
 
@@ -51,7 +56,8 @@ void CMyArray::resize( unsigned int size )
    mArray = tmpArray;   
 }
 
-void CMyArray::pushBack( int data )
+template<typename T>
+void CMyArray<T>::pushBack( T data )
 {
    if (mSize >= mAllocatedSize)
       resize( mAllocatedSize + ALLOCATED_STEP );
@@ -59,7 +65,8 @@ void CMyArray::pushBack( int data )
    mArray[mSize++] = data;
 }
 
-int CMyArray::popBack()
+template<typename T>
+int CMyArray<T>::popBack()
 {
    int tmp = mArray[--mSize];
 
@@ -69,17 +76,19 @@ int CMyArray::popBack()
    return tmp;
 }
 
-void CMyArray::clear()
+template<typename T>
+void CMyArray<T>::clear()
 {
    delete[] mArray;
    mAllocatedSize = ALLOCATED_STEP;
    mSize = 0;
-   mArray = new int[mAllocatedSize];
+   mArray = new T[mAllocatedSize];
    for (size_t i = 0; i < mAllocatedSize; i++)
       mArray[i] = 0;
 }
 
-int CMyArray::getIndexOf( int data )
+template<typename T>
+int CMyArray<T>::getIndexOf( T data )
 {
    for (size_t i = 0; i < mSize; i++)
       if (mArray[i]==data) 
@@ -88,7 +97,8 @@ int CMyArray::getIndexOf( int data )
    return -1;
 }
 
-int CMyArray::getLastIndexOf( int data )
+template<typename T>
+int CMyArray<T>::getLastIndexOf( T data )
 {
    for (size_t i = mSize-1; i >= 0; i--)
       if (mArray[i]==data)
@@ -97,7 +107,8 @@ int CMyArray::getLastIndexOf( int data )
    return -1;
 }
 
-void CMyArray::insert( unsigned int index, int data )
+template<typename T>
+void CMyArray<T>::insert( unsigned int index, T data )
 {
    if (index<mSize)
    {
@@ -120,7 +131,8 @@ void CMyArray::insert( unsigned int index, int data )
    mArray[index] = data;
 }
 
-void CMyArray::removeAt( unsigned int index )
+template<typename T>
+void CMyArray<T>::removeAt( unsigned int index )
 {
    if (index<mSize)
    {
@@ -131,7 +143,8 @@ void CMyArray::removeAt( unsigned int index )
    }
 }
 
-void CMyArray::reverse()
+template<typename T>
+void CMyArray<T>::reverse()
 {
    int tmp;
    for (size_t i = 0, j = mSize-1; i < mSize; i++, j--)
@@ -142,7 +155,8 @@ void CMyArray::reverse()
    }
 }
 
-void CMyArray::sortUp()
+template<typename T>
+void CMyArray<T>::sortUp()
 {
    bool isChanged;
    int tmp;
@@ -162,7 +176,8 @@ void CMyArray::sortUp()
    while (isChanged);
 }
 
-void CMyArray::shuffle()
+template<typename T>
+void CMyArray<T>::shuffle()
 {
    int mixCount = rand() % mSize;
    int a, b;
@@ -178,7 +193,8 @@ void CMyArray::shuffle()
    }
 }
 
-bool CMyArray::operator==(const CMyArray & rValue)
+template<typename T>
+bool CMyArray<T>::operator==(const CMyArray & rValue)
 {
    if (mSize!=rValue.mSize) 
       return false;
@@ -189,13 +205,15 @@ bool CMyArray::operator==(const CMyArray & rValue)
    return true;
 }
 
-void CMyArray::operator()() 
+template<typename T>
+void CMyArray<T>::operator()()
 {
    for (size_t i = 0; i < mSize; i++)
       mArray[i] = 0;
 }                   
 
-int & CMyArray::operator[]( unsigned int index )
+template<typename T>
+int & CMyArray<T>::operator[]( unsigned int index )
 {
    if (index>=mSize && index<mAllocatedSize)
    {

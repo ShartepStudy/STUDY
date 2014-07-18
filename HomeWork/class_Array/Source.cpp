@@ -2,6 +2,8 @@
 
 void main()
 {
-   CMyArray A, B( 25 );
+   CMyArray<char> A(25);
 
+   A.pushBack( 'H' );
+   
 }
