@@ -3,13 +3,17 @@
 
 CMyString::CMyString()
    : mArray(80)
-{}
+{
+   mArray.pushBack( '\0' );
+}
 
 CMyString::CMyString( unsigned int capacity )
    : mArray( capacity > 10 ? capacity : 10 )
-{}
+{
+   mArray.pushBack( '\0' );
+}
 
-CMyString::CMyString( char * str )
+CMyString::CMyString( const char * str )
 {
    while (*str)
       mArray.pushBack( *(str++) );
@@ -21,7 +25,7 @@ CMyString::CMyString( const CMyString & obj )
    : mArray(obj.mArray)
 {}
 
-CMyString::CMyString( char * str, unsigned int capacity )
+CMyString::CMyString( const char * str, unsigned int capacity )
    : mArray( capacity )
 {
    while (str)
@@ -41,7 +45,7 @@ CMyString::~CMyString()
 {}
 
 //---------------------------------------------------------------------------------------
-const char * CMyString::c_str()
+const char * CMyString::c_str() const
 {
    return mArray.getPTR();
 }
@@ -51,8 +55,9 @@ const char * CMyString::c_str()
 
 //---------------------------------------------------------------------------------------
 
-CMyString & CMyString::operator=(char * str)
+CMyString & CMyString::operator=(const char * str)
 {
+   mArray.clear();
    while (*str)
       mArray.pushBack( *(str++) );
 
@@ -66,15 +71,113 @@ CMyString & CMyString::operator=(const CMyString & rValue)
    return *this;
 }
 
-bool CMyString::operator==(char * str)
+bool CMyString::operator==(const char * str) const
 {
    return !strcmp( c_str(), str );
 }
 
-bool CMyString::operator==(const CMyString & rValue)
+bool CMyString::operator==(const CMyString & rValue) const
 {
    return mArray == rValue.mArray;
 }
+
+bool operator==(const char * str, const CMyString & rValue)
+{
+   return rValue==str;
+}
+
+bool CMyString::operator!=(const char * str) const
+{
+   return !(*this==str);
+}
+
+bool CMyString::operator!=(const CMyString & rValue) const
+{
+   return !(*this==rValue);
+}
+
+bool operator!=(const char * str, const CMyString & rValue)
+{
+   return !(rValue==str);
+}
+
+bool CMyString::operator>(const CMyString & rValue) const 
+{
+   return strcmp( c_str(), rValue.c_str() )>0 ? true : false ; 
+}
+
+bool CMyString::operator>(const char * str) const
+{
+   return strcmp( c_str(), str )>0 ? true : false;
+}
+
+bool operator>(const char * str, const CMyString & rValue)
+{
+   return strcmp( str, rValue.c_str() )>0 ? true : false;
+}
+
+bool CMyString::operator<(const CMyString & rValue) const
+{
+   return strcmp( c_str(), rValue.c_str() )<0 ? true : false;
+}
+
+bool CMyString::operator<(const char * str) const
+{
+   return strcmp( c_str(), str )<0 ? true : false;
+}
+
+bool operator<(const char * str, const CMyString & rValue)
+{
+   return strcmp( str, rValue.c_str() )<0 ? true : false;
+}
+
+bool CMyString::operator>=(const CMyString & rValue) const
+{
+   return strcmp( c_str(), rValue.c_str() )>=0 ? true : false;
+}
+
+bool CMyString::operator>=(const char * str) const
+{
+   return strcmp( c_str(), str )>=0 ? true : false;
+}
+
+bool operator>=(const char * str, const CMyString & rValue)
+{
+   return strcmp( str, rValue.c_str() )>=0 ? true : false;
+}
+
+bool CMyString::operator<=(const CMyString & rValue) const
+{
+   return strcmp( c_str(), rValue.c_str() )<=0 ? true : false;
+}
+
+bool CMyString::operator<=(const char * str) const
+{
+   return strcmp( c_str(), str )<=0 ? true : false;
+}
+
+bool operator<=(const char * str, const CMyString & rValue)
+{
+   return strcmp( str, rValue.c_str() )<=0 ? true : false;
+}
+
+CMyString & CMyString::operator()( const CMyString & rValue )
+{
+   *this = rValue;
+   return *this;
+}
+
+CMyString & CMyString::operator()( const char * str )
+{
+   *this = str;
+   return *this;
+}
+
+char & CMyString::operator[]( unsigned int index )
+{
+   return mArray[index];
+}
+
 
 ostream & operator<<(ostream & os, CMyString & obj)
 {

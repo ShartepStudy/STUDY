@@ -39,7 +39,7 @@ public:
    // кол-во элементов в массиве
    unsigned int getSize() const;
 
-   const T * getPTR();
+   const T * getPTR() const;
 
    // вставка элемента в массив по указанному индексу
    void insert( unsigned int index, T data );
@@ -60,7 +60,7 @@ public:
    CMyArray & operator=(const CMyArray & rValue);
    bool operator==( const CMyArray & rValue ) const;
    void operator()();                        // повторная инициализация элементов массива
-   T & operator[]( unsigned int index );
+   T & operator[]( unsigned int index ) const;
 };
 
 #include "MyArray.cpp"

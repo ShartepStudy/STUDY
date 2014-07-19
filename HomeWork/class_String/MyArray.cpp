@@ -112,7 +112,7 @@ unsigned int CMyArray<T>::getSize() const
 }
 
 template<typename T>
-const T * CMyArray<T>::getPTR()
+const T * CMyArray<T>::getPTR() const
 {
    return mArray;
 }
@@ -239,17 +239,11 @@ void CMyArray<T>::operator()()
 }                   
 
 template<typename T>
-T & CMyArray<T>::operator[]( unsigned int index )
+T & CMyArray<T>::operator[]( unsigned int index ) const
 {
-   if (index>=mSize && index<mAllocatedSize)
-   {
-      mSize = index + 1;
-   }
-   else if (index>mAllocatedSize)
-   {
-      resize( index + ALLOCATED_STEP );
-      mSize = index + 1;
-   }
+   if (index>=mSize)
+      return mArray[mSize-1];
+
    return mArray[index];
 }
 
