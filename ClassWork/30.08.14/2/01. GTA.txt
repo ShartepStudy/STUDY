@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	virtual void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void main(){
+	Transport* GTA;
+
+	setlocale(0,"");
+
+    int choice;
+    cout << "Введите тип объекта (1-3): ";
+    cin >> choice;
+
+    switch (choice)
+    {
+    	case 1:
+        GTA = new Telega;
+        break;
+	case 2:
+        GTA = new Bike;
+        break;
+	case 3:
+        GTA = new Car;
+        break;
+    }
+
+    GTA->Drive();
+
+    delete GTA;
+}

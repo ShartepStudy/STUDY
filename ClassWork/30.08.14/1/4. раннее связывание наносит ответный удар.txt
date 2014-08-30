@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void main(){
+
+	int all = 5;
+
+	Transport **traffic =new Transport*[all];
+
+	traffic[0] = new Car;
+	traffic[1] = new Car;
+	traffic[2] = new Bike;
+	traffic[3] = new Bike;
+	traffic[4] = new Telega;
+
+	///////////////////////// ждём светофор...
+
+	system("color 0C");
+	cout<<"Wait 3 ";
+	_sleep(1000);
+	cout<<"2 ";
+	_sleep(1000);
+	cout<<"1 ";
+	_sleep(1000);
+	system("cls");
+	system("color 0A");
+	cout<<"Go!\n\n";
+	_sleep(1000);
+	system("color 07");
+
+	///////////////////////// поехали!
+	for(int i=0; i<all; i++)
+		traffic[i]->Drive();
+}
+
+// упс! при попытке моделирования ситуации на светофоре программа сработала не совсем так, как хотелось бы.
+
+// всему виной - раннее связывание.
+// ну в самом деле, метод Drive() же вызывается через указатель traffic[i],
+// а ведь это указатель на тип Transport. соответственно, компилятор вызывает метод именно из класса Transport.
+// в итоге, и велосипед, и телега, и машина поедут каким-то общесхематическим неопределённым образом.

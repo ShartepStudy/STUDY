@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+class Dog
+{
+public:
+	char* name;
+	int age;
+public:
+	/*virtual */void Guard()
+	{
+		cout << "Dog Guard!\n";
+	}
+	/*virtual */void Bark()
+	{
+		cout << "Dog Bark!\n";
+	}
+};
+
+class PugDog : public Dog
+{
+public:
+	int some_field;
+	void Guard()
+	{
+		cout << "Mops Guard!\n";
+	}
+	void Bark()
+	{
+		cout << "Mops Bark!\n";
+	}
+};
+
+void main()
+{
+	setlocale(0, "");
+	cout << "Размер в байтах типа Dog: ";
+	cout << sizeof(Dog) << "\n";
+
+	cout << "Размер в байтах типа PugDog: ";
+	cout << sizeof(PugDog) << "\n\n";
+
+	PugDog d;
+	cout << "Адрес объекта d типа PugDog: ";
+	cout << &d << "\n";
+
+	cout << "Адрес первого поля объекта d: ";
+	cout << &d.name << "\n";
+
+	cout << "Адрес второго поля объекта d: ";
+	cout << &d.age << "\n";
+
+	cout << "Адрес третьего поля объекта d: ";
+	cout << &d.some_field << "\n";
+}

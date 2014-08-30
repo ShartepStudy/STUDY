@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	virtual void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	virtual void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void Show(Transport &t){
+	t.Drive();
+}
+
+void main(){
+	Bike harley;
+	Show(harley);
+
+	Car lada_kalina;
+	Show(lada_kalina);
+}
+
+// вызывать виртуальную функцию можно и через ссылку на объект базового класса!
+
+// и да, нельзя совместить ключевые слова static и virtual. то есть, для статических методов класса позднее связывание не сработает.

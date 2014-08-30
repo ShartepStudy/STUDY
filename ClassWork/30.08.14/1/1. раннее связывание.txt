@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void main(){
+	Car c;
+	Bike b;
+
+	c.Drive();
+	b.Drive();
+}
+
+// каждый класс, отнаследованный от Transport, содержит метод "≈хать".
+// однако, каждый едет по-своему (разные реализации).
+// если завести несколько объктов разных классов,
+// то компил€тор поступит вполне предсказуемо, и вызовет
+// методы Drive дл€ класса Car и Bike соответственно.
+
+// на что при этом ориентируетс€ компил€тор?
+
+// на тип объектной переменной, через которую вызываетс€ метод.
+// причЄм тип объекта точно известен на этапе компил€ции, а это означает, что
+// св€зывание вызова метода через этот объект с кодом метода Drive происходит
+// на этапе построени€ приложени€. такой процесс называетс€
+// "раннее св€зывание".
