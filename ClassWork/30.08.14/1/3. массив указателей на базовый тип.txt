@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void main(){
+
+	Bike author, azimut;
+	Car zaporozhets;
+
+	Transport *mass [4];
+	mass[0] = &author;
+	mass[1] = &azimut;
+	mass[2] = &zaporozhets;
+
+}
+
+// в итоге, никто не запретит создать целый массив указателей на базовый тип,
+// и поприсваивать им указатели на объекты производных классов.
+
+// таким образом, решается проблема хранения разнотипных объектов,
+// (однако имеющих общего предка) в виде массива!

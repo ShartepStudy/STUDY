@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+class Dog
+{
+	// void * ptr_na_tvm;
+
+public:
+	char* name;
+	int age;
+public:
+	void Guard() // :200 - index 0
+	{
+		cout << "Dog Guard!\n";
+	}
+	void Bark() // :204 - index 1
+	{
+		cout << "Dog Bark!\n";
+	}
+};
+
+class PugDog : public Dog
+{
+	// void * ptr_na_tvm; // доставшийся в наследство от Dog!
+
+public:
+	int some_field;
+	void Guard() // :500 - index 0
+	{
+		cout << "Mops Guard!\n";
+	}
+	void Bark() // :504 - index 1
+	{
+		cout << "Mops Bark!\n";
+	}
+};
+
+void main()
+{
+	setlocale(0, "");
+
+	Dog d;
+	d.Bark(); // пишем так
+	// а на самом деле:
+	// d.ptr_na_tvm[Bark_index]();
+	
+	PugDog p;
+	p.Bark(); // пишем так
+	// а на самом деле:
+	// p.ptr_na_tvm[Bark_index]();
+
+}

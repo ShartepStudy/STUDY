@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Dog
+{
+public: // для простоты восприятия
+	char* name;
+	int age;
+public:
+	void Guard()
+	{
+		
+	}
+	void Bark()
+	{
+		
+	}
+
+	static void Test()
+	{
+		
+	}
+};
+
+//class Mops : public Dog
+
+void main()
+{
+	setlocale(0, "");
+	cout << "Размер в байтах типа Dog: ";
+	cout << sizeof(Dog) << "\n";
+
+	Dog d;
+	cout << "Адрес объекта d типа Dog: ";
+	cout << &d << "\n";
+
+	cout << "Адрес первого поля объекта d: ";
+	cout << &d.name << "\n";
+
+	cout << "Адрес второго поля объекта d: ";
+	cout << &d.age << "\n";
+
+	cout << "Адрес статического метода класса Dog: ";
+	cout << &Dog::Test << " (или ";
+	cout << &d.Test << ")\n";
+
+	// http://www.rsdn.ru/article/cpp/fastdelegate.xml
+	cout << "Адрес обычного метода класса Dog: ";
+	//cout << &Dog::Bark << "\n";
+	//void (Dog::*ptr)() = &Dog::Bark;
+
+
+}

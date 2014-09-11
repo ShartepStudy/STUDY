@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+
+class Transport{
+protected:
+	double speed;
+public:
+	virtual void Drive(){
+		cout<<"Some transport...\n";
+	}
+};
+
+class Car: public Transport{
+public:
+	void Drive(){
+		cout<<"Car!\n";
+	}
+};
+
+class Bike: public Transport{
+public:
+	void Drive(){
+		cout<<"Bike!\n";
+	}
+};
+
+class Telega: public Transport{
+public:
+	void Drive(){
+		cout<<"Telega!\n";
+	}
+};
+
+void main(){
+
+	int all = 5;
+
+	Transport **traffic =new Transport*[all];
+
+	traffic[0] = new Car;
+	traffic[1] = new Car;
+	traffic[2] = new Bike;
+	traffic[3] = new Bike;
+	traffic[4] = new Telega;
+
+	///////////////////////// ждЄм светофор...
+
+	system("color 0C");
+	cout<<"Wait 3 ";
+	_sleep(1000);
+	cout<<"2 ";
+	_sleep(1000);
+	cout<<"1 ";
+	_sleep(1000);
+	system("cls");
+	system("color 0A");
+	cout<<"Go!\n\n";
+	_sleep(1000);
+	system("color 07");
+
+	///////////////////////// поехали!
+	for(int i=0; i<all; i++)
+		traffic[i]->Drive();
+}
+
+// виртуальные функции (или виртуальные методы, что одно и то же)
+// позвол€ют решить все проблемы.
+
+// виртуальный метод - это метод, дл€ вызова которого используетс€
+// позднее св€зывание (то есть, св€зывание вызова метода через объект
+// с кодом метода происходит уже на этапе выполнени€ программы, а не на этапе
+// компил€ции). поэтому теперь всЄ честно.
+
+// существует правило виртуальности: метод, объ€вленный виртуальным в некотором классе,
+// остаЄтс€ таким во всех классах-потомках. но дл€ €сности рекомендуетс€ писать
+// ключевое слово virtual и в классах-наследниках, чтобы код оставалс€ читабельным и пон€тным.
