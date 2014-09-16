@@ -9,7 +9,7 @@
 namespace sokoban {
 
 enum CellType {
-  MIN_CELL_TYPE,
+  MIN_CELL_TYPE = 0,
   EMPTY,
   PLAYER,
   BOX,
@@ -45,7 +45,7 @@ private:
   bool is_modify_;
   bool is_initialize_;
 
-//  DISALLOW_COPY_AND_ASSIGN(GamePole);
+  DISALLOW_COPY_AND_ASSIGN(GamePole);
 };
 
 }   // namespace sokoban

@@ -17,16 +17,17 @@ public:
 
   static bool SetGamePole(GamePole* game_pole);
 protected:
-  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[x][y]; }
-  void SetCell(size_t x, size_t y, CellType data) { (*game_pole_)[x][y] = data; }
+  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x]; }
+  void SetCell(size_t x, size_t y, CellType data) { (*game_pole_)[y][x] = data; }
 
   int x_;
   int y_;
 
   bool with_box_;
-private:
+
   static GamePole* game_pole_;
 
+private:
   DISALLOW_ASSIGN(Command);
 };
 

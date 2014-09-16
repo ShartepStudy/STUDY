@@ -17,14 +17,20 @@ void GamePole::Init(char* file_name) {
     throw OpenInputFileException("GamePole::Init", file_name);
   }
 
-  char data;
+  char c;
   std::vector<CellType> vector_x;
-  while (data = file.get()) {
-    if ('\n' == data) {
+  while (!file.eof()) {
+    char c = file.get();
+    int data = atoi(&c);
+    if (!data) {
       pole_.push_back(vector_x);
       vector_x.clear();
     } else if (data > MIN_CELL_TYPE && data < MAX_CELL_TYPE) {
       vector_x.push_back(static_cast<CellType>(data));
+      if (data == PLAYER) {
+        x_ = vector_x.size() - 1;
+        y_ = pole_.size();
+      }
     } else {
       throw ReadWrongDataFromFileException("GamePole::Init", data);
     }
@@ -55,7 +61,7 @@ void GamePole::Save(char* file_name) {
 bool GamePole::SetXY(int x, int y) {
   bool rv;
   if (is_initialize_) {
-    rv = (PLAYER == pole_[x][y]);
+    rv = (PLAYER == pole_[y][x]);
   
     if (rv) {
       x_ = x;

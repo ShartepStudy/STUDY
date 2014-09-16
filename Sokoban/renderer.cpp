@@ -8,6 +8,7 @@
 namespace sokoban {
 
 void Renderer::Show() {
+  system("cls");
   for (auto it_y = std::begin(game_pole_()); it_y != std::end(game_pole_()); ++it_y) {
     for (auto it_x = std::begin(*it_y); it_x != std::end(*it_y); ++it_x) {
       std::cout << std::to_string(*it_x);

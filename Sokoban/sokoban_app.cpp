@@ -32,54 +32,33 @@ void SokobanApp::Run() {
       btnCode = getch();
     }
 
-    if (UP_BUTTON == btnCode) {
-      CommandUp command_up;
-      if (command_up.Execute()) {
-        //        undo_commands_.Push(command_up);
-      }
-    } else if (DOWN_BUTTON == btnCode) {
-      CommandDown command_down;
-      if (command_down.Execute()) {
-        //        undo_commands_.Push(command_down);
-      }
-    } else if (LEFT_BUTTON == btnCode) {
-      CommandLeft command_left;
-      if (command_left.Execute()) {
-        //        undo_commands_.Push(command_left);
-      }
-    } else if (RIGHT_BUTTON == btnCode) {
-      CommandRight command_right;
-      if (command_right.Execute()) {
-        //        undo_commands_.Push(command_right);
-      }
-    }
-/*    switch (btnCode) {
-    case UP_BUTTON:
+    switch (btnCode) {
+    case UP_BUTTON: {
       CommandUp command_up;
       if (command_up.Execute()) {
 //        undo_commands_.Push(command_up);
-      }
+      }}
       break;
-    case DOWN_BUTTON:
+    case DOWN_BUTTON: {
       CommandDown command_down;
       if (command_down.Execute()) {
 //        undo_commands_.Push(command_down);
-      }
+      }}
       break;
-    case LEFT_BUTTON:
+    case LEFT_BUTTON: {
       CommandLeft command_left;
       if (command_left.Execute()) {
 //        undo_commands_.Push(command_left);
-      }
+      }}
       break;
-    case RIGHT_BUTTON:
+    case RIGHT_BUTTON: {
       CommandRight command_right;
       if (command_right.Execute()) {
 //        undo_commands_.Push(command_right);
-      }
+      }}
       break;
     }
-*/
+
   } while(true);
 }
 
