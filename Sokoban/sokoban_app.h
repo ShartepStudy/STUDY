@@ -5,10 +5,17 @@
 
 #include "game_pole.h"
 #include "renderer.h"
-#include "command.h"
-#include "stack.h"
+//#include "command_stack.h"
 
 namespace sokoban {
+
+enum ButtonCode {
+  UP_BUTTON = 72,
+  LEFT_BUTTON = 75,
+  RIGHT_BUTTON = 77,
+  DOWN_BUTTON = 80,
+  EXTENDED_BUTTONS = 224
+};
 
 class SokobanApp {
 public:
@@ -20,8 +27,8 @@ public:
 private:
   GamePole game_pole_;
   Renderer renderer_;
-  Stack<Command> undo_commands_;
-  Stack<Command> redo_commands_;
+//  CommandStack undo_commands_;
+//  CommandStack redo_commands_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };
