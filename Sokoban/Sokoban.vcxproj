@@ -77,10 +77,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="command.cpp" />
-    <ClCompile Include="command_down.cpp" />
-    <ClCompile Include="command_left.cpp" />
-    <ClCompile Include="command_right.cpp" />
-    <ClCompile Include="command_up.cpp" />
     <ClCompile Include="game_pole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />

@@ -1,20 +1,27 @@
 #ifndef SOKOBAN_APP_H
 #define SOKOBAN_APP_H
 
-#include "macros.h"
+#include <stack>
+#include <memory>
 
+#include "macros.h"
 #include "game_pole.h"
 #include "renderer.h"
-//#include "command_stack.h"
 
 namespace sokoban {
 
+class Command;
+
 enum ButtonCode {
-  UP_BUTTON = 72,
-  LEFT_BUTTON = 75,
-  RIGHT_BUTTON = 77,
-  DOWN_BUTTON = 80,
-  EXTENDED_BUTTONS = 224
+  UP_BUTTON           = 72,
+  LEFT_BUTTON         = 75,
+  RIGHT_BUTTON        = 77,
+  DOWN_BUTTON         = 80,
+  R_BUTTON            = 82,
+  U_BUTTON            = 85,
+  r_BUTTON            = 114,
+  u_BUTTON            = 117,
+  EXTENDED_BUTTONS    = 224
 };
 
 class SokobanApp {
@@ -25,10 +32,12 @@ public:
   void Run();
 
 private:
+  void UndoHelper(std::shared_ptr<Command>& command);
+
   GamePole game_pole_;
   Renderer renderer_;
-//  CommandStack undo_commands_;
-//  CommandStack redo_commands_;
+  std::stack<std::shared_ptr<Command> > undo_commands_;
+  std::stack<std::shared_ptr<Command> > redo_commands_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };

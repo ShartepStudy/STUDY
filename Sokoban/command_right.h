@@ -10,8 +10,8 @@ public:
   CommandRight(): Command() {}
   virtual ~CommandRight() {}
 
-  virtual bool Execute();
-  virtual bool UnExecute();
+  virtual bool Execute() { return ExecuteHelper(1, 0); }
+  virtual bool UnExecute() { return UnExecuteHelper(1, 0); }
 };
 
 }               //    namespace sokoban

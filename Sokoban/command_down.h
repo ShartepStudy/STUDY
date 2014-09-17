@@ -10,8 +10,8 @@ public:
   CommandDown(): Command() {}
   virtual ~CommandDown() {}
 
-  virtual bool Execute();
-  virtual bool UnExecute();
+  virtual bool Execute() { return ExecuteHelper(0, 1); }
+  virtual bool UnExecute() { return UnExecuteHelper(0, 1); }
 };
 
 }               //    namespace sokoban

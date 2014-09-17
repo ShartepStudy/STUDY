@@ -10,12 +10,13 @@ namespace sokoban {
 
 enum CellType {
   MIN_CELL_TYPE = 0,
-  EMPTY,
-  PLAYER,
-  BOX,
-  FREE,
-  WALL,
-  MAX_CELL_TYPE
+  EMPTY         = 1,
+  PLAYER        = 2,
+  BOX           = 3,
+  FREE          = 4,
+  WALL          = 5,
+  NEXT_LINE     = 6,
+  MAX_CELL_TYPE = 7
 };
 
 class GamePole {
@@ -28,6 +29,7 @@ public:
 
   bool IsModify() { return is_modify_; }
   void SetModify() { is_modify_ = true; }
+  void SetUnModify() { is_modify_ = false; }
 
   int X() const { return x_; }
   int Y() const { return y_; }
@@ -35,7 +37,9 @@ public:
 
   std::vector<CellType>& operator[](size_t index) throw(GamePoleNotInitializeException);
   const std::vector< std::vector<CellType> >& operator()() const throw(GamePoleNotInitializeException);
-    
+  
+  void DefaultInit();
+
 private:
   std::vector< std::vector<CellType> > pole_;
 

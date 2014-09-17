@@ -17,8 +17,11 @@ public:
 
   static bool SetGamePole(GamePole* game_pole);
 protected:
+  bool ExecuteHelper(int dx, int dy);
+  bool UnExecuteHelper(int dx, int dy);
+
   CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x]; }
-  void SetCell(size_t x, size_t y, CellType data) { (*game_pole_)[y][x] = data; }
+  void SetCell(size_t x, size_t y, CellType data);
 
   int x_;
   int y_;

@@ -9,7 +9,6 @@ GamePole::GamePole():
     is_initialize_(false) 
 {}
 
-
 void GamePole::Init(char* file_name) {
   std::ifstream file(file_name);
 
@@ -17,12 +16,10 @@ void GamePole::Init(char* file_name) {
     throw OpenInputFileException("GamePole::Init", file_name);
   }
 
-  char c;
+  int data;
   std::vector<CellType> vector_x;
-  while (!file.eof()) {
-    char c = file.get();
-    int data = atoi(&c);
-    if (!data) {
+  while (-1 != (data = file.get())) {
+    if (NEXT_LINE == data) {
       pole_.push_back(vector_x);
       vector_x.clear();
     } else if (data > MIN_CELL_TYPE && data < MAX_CELL_TYPE) {
@@ -48,11 +45,11 @@ void GamePole::Save(char* file_name) {
       throw OpenOutputFileException("GamePole::Save", file_name);
     }
 
-    for (auto it_y = std::begin(pole_); it_y != std::end(pole_); ++it_y) {
-      for (auto it_x = std::begin(*it_y); it_x != std::end(*it_y); ++it_x) {
-        file << static_cast<char>(*it_x);
+    for (auto it_y: pole_) {
+      for (auto it_x: it_y) {
+        file << static_cast<char>(it_x);
       }
-      file << '\n';
+      file << static_cast<char>(NEXT_LINE);
     }
     file.close();
   }
@@ -82,9 +79,47 @@ std::vector<CellType>& GamePole::operator[](size_t index) {
 
 const std::vector< std::vector<CellType> >& GamePole::operator()() const {
   if (!is_initialize_) {
-    throw GamePoleNotInitializeException("GamePole::operator[]");
+    throw GamePoleNotInitializeException("GamePole::operator()");
   }
   return pole_;
+}
+
+void GamePole::DefaultInit() {
+  int arr[20][20] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 3, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1},
+                      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  };
+
+  std::vector<CellType> vector_x;
+  
+  for (size_t i = 0; i < 20; i++) {
+    for (size_t j = 0; j < 20; j++) {
+      vector_x.push_back(static_cast<CellType>(arr[i][j]));
+    }
+    pole_.push_back(vector_x);
+    vector_x.clear();
+  }
+  x_ = 9;
+  y_ = 10;
+  is_modify_ = true;
+  is_initialize_ = true;
 }
 
 }   // namespace sokoban
