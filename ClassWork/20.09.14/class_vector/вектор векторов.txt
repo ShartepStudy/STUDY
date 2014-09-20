@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <windows.h>
+using namespace std;
+
+typedef std::vector< std::vector<int> > pxMP;
+
+void function() {
+	int sizeX=5, sizeY=10; // указываем размер "на лету".
+	pxMP pxMap(sizeX, std::vector<int>(sizeY));
+
+	pxMap[0][0]=5;
+	cout<<pxMap[0][0];
+
+	// удаляем левый и правый столбец
+	pxMap.pop_back();
+	pxMap.erase(pxMap.begin());
+
+	// удаляем верхнюю и нижнюю строки из всех столбцов, для начала создаем некоторые инструменты для этого:
+	std::vector< std::vector<int> >::iterator iterlvl2; // итератор для второго измерения.
+	std::vector< int >::iterator iterlvl1; // итератор для первого измерения
+
+	// Уходим вглубь
+	for (iterlvl2=pxMap.begin();iterlvl2 != pxMap.end();iterlvl2++) {
+		iterlvl1 = (*iterlvl2).begin(); // Только для демонстрации
+		(*iterlvl2).pop_back();
+		(*iterlvl2).erase((*iterlvl2).begin()); // где мы?
+
+		sizeY = (*iterlvl2).size(); // Устанавливаем sizeY пока мы на этом уровне. Потом мы не сможем этого сделать
+	}
+
+}
+
+
+void main(){
+	function();
+}
