@@ -3,27 +3,34 @@
 
 #include "macros.h"
 
-namespace sokoban {
+#include "game_pole.h"
 
-class GamePole;
+namespace sokoban {
 
 class Command {
 public:
-  Command() {}
-  ~Command() {}
+  Command();
+  virtual ~Command() {}
   
-  virtual bool Execute() const = 0;
-  virtual bool UnExecute() const = 0;
+  virtual bool Execute() = 0;
+  virtual bool UnExecute() = 0;
 
   static bool SetGamePole(GamePole* game_pole);
-private:
-  static GamePole* game_pole_;
+protected:
+  bool ExecuteHelper(int dx, int dy);
+  bool UnExecuteHelper(int dx, int dy);
 
-  int start_x_;
-  int start_y_;
+  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x]; }
+  void SetCell(size_t x, size_t y, CellType data);
+
+  int x_;
+  int y_;
 
   bool with_box_;
 
+  static GamePole* game_pole_;
+
+private:
   DISALLOW_ASSIGN(Command);
 };
 

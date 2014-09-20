@@ -2,6 +2,12 @@
 
 #include <conio.h>
 
+#include "command.h"
+#include "command_down.h"
+#include "command_left.h"
+#include "command_right.h"
+#include "command_up.h"
+
 namespace sokoban {
 
 SokobanApp::SokobanApp():
@@ -14,47 +20,65 @@ SokobanApp::SokobanApp():
 }
 
 void SokobanApp::Run() {
-  game_pole_.Init("level_1.dat"); 
+  game_pole_.Init("level_2.dat"); 
 
   do {
-    if (game_pole_.IsModify()) {
-      renderer_.Show();
-    }
+    renderer_.Show();
 
+    std::shared_ptr<Command> command;
+    
     int btnCode = getch();
-    if (btnCode == 224) {
+    if (EXTENDED_BUTTONS == btnCode) {
       btnCode = getch();
     }
 
     switch (btnCode) {
-    case 72:
-      CommandUp command_up;
-      if (command_up.Execute()) {
-        undo_commands_.Push(command_up);
+    case UP_BUTTON: 
+      command.reset(new CommandUp);
+      UndoHelper(command);
+      break;
+    case DOWN_BUTTON: 
+      command.reset(new CommandDown);
+      UndoHelper(command);
+      break;
+    case LEFT_BUTTON: 
+      command.reset(new CommandLeft);
+      UndoHelper(command);
+      break;
+    case RIGHT_BUTTON: 
+      command.reset(new CommandRight);
+      UndoHelper(command);
+      break;
+    case U_BUTTON:
+    case u_BUTTON:
+      if (!undo_commands_.empty()) {
+        command = undo_commands_.top();
+        undo_commands_.pop();
+        command->UnExecute();
+        redo_commands_.push(command);
       }
       break;
-    case 80:
-      CommandDown command_down;
-      if (command_down.Execute()) {
-        undo_commands_.Push(command_down);
+    case R_BUTTON:
+    case r_BUTTON:
+      if (!redo_commands_.empty()) {
+        command = redo_commands_.top();
+        redo_commands_.pop();
+        command->Execute();
+        undo_commands_.push(command);
       }
       break;
-    case 75:
-      CommandLeft command_left;
-      if (command_left.Execute()) {
-        undo_commands_.Push(command_left);
-      }
-      break;
-    case 77:
-      CommandRight command_right;
-      if (command_right.Execute()) {
-        undo_commands_.Push(command_right);
-      }
-      break;
-    default:
     }
 
   } while(true);
+}
+
+void SokobanApp::UndoHelper(std::shared_ptr<Command>& command) {
+  if (command->Execute()) {
+    undo_commands_.push(command);
+    if (!redo_commands_.empty()) {
+      redo_commands_ = std::stack<std::shared_ptr<Command> >();
+    }
+  }
 }
 
 }   // namespace sokoban
