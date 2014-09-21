@@ -20,8 +20,9 @@ SokobanApp::SokobanApp():
 }
 
 void SokobanApp::Run() {
-  game_pole_.Init("level_2.dat"); 
-
+  game_pole_.Init("level_5.dat"); 
+//  game_pole_.DefaultInit();
+//  game_pole_.Save("level_5.dat");
   do {
     renderer_.Show();
 

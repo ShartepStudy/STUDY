@@ -1,7 +1,9 @@
 #ifndef GAME_POLE_H
 #define GAME_POLE_H
 
+#include <utility>
 #include <vector>
+#include <windows.h>
 
 #include "macros.h"
 #include "sokoban_exception.h"
@@ -9,15 +11,18 @@
 namespace sokoban {
 
 enum CellType {
-  MIN_CELL_TYPE = 0,
-  EMPTY         = 1,
-  PLAYER        = 2,
-  BOX           = 3,
-  FREE          = 4,
-  WALL          = 5,
-  NEXT_LINE     = 6,
-  MAX_CELL_TYPE = 7
+  MIN_CELL_TYPE = -1,
+  EMPTY         = 0,
+  PLAYER        = 1,
+  BOX           = 2,
+  FREE          = 3,
+  WALL          = 4,
+  BOX_PLACE     = 5,
+  MAX_CELL_TYPE = 6,
+  NEXT_LINE     = 7
 };
+
+typedef std::pair<CellType, HWND> CellPair;
 
 class GamePole {
 public:
@@ -35,16 +40,22 @@ public:
   int Y() const { return y_; }
   bool SetXY(int x, int y);
 
-  std::vector<CellType>& operator[](size_t index) throw(GamePoleNotInitializeException);
-  const std::vector< std::vector<CellType> >& operator()() const throw(GamePoleNotInitializeException);
+  size_t GetWidth() const { return width_; }
+  size_t GetHeight() const { return height_; }
+
+  std::vector<CellPair>& operator[](size_t index) throw(GamePoleNotInitializeException);
+  const std::vector< std::vector<CellPair> >& operator()() const throw(GamePoleNotInitializeException);
   
   void DefaultInit();
 
 private:
-  std::vector< std::vector<CellType> > pole_;
+  std::vector< std::vector<CellPair> > pole_;
 
   int x_;
   int y_;
+
+  size_t width_;
+  size_t height_;
 
   bool is_modify_;
   bool is_initialize_;

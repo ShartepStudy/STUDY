@@ -1,6 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <vector>
+#include <windows.h>
+
 #include "macros.h"
 
 namespace sokoban {
@@ -9,13 +12,15 @@ class GamePole;
   
 class Renderer {
 public:
-  Renderer(GamePole& game_pole): game_pole_(game_pole) {};
+  Renderer(GamePole& game_pole);
   ~Renderer() {};
 
   void Show();
 
 private:
   GamePole& game_pole_;
+
+  std::vector<HBITMAP> h_bitmaps_;
 
   DISALLOW_COPY_AND_ASSIGN(Renderer);
 };

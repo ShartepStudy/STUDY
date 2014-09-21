@@ -52,7 +52,7 @@ bool Command::UnExecuteHelper(int dx, int dy) {
 }
 
 void Command::SetCell(size_t x, size_t y, CellType data) { 
-  (*game_pole_)[y][x] = data; 
+  (*game_pole_)[y][x].first = data; 
   if (PLAYER == data) {
     game_pole_->SetXY(x, y);
   }

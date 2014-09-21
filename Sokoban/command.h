@@ -20,7 +20,7 @@ protected:
   bool ExecuteHelper(int dx, int dy);
   bool UnExecuteHelper(int dx, int dy);
 
-  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x]; }
+  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x].first; }
   void SetCell(size_t x, size_t y, CellType data);
 
   int x_;

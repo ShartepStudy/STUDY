@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2F4B7EF9-0B6E-4E34-AFE1-96871CC4ED8F}</ProjectGuid>
+    <ProjectGuid>{02E919E3-8E9A-407C-9631-1CCAC9747515}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Sokoban</RootNamespace>
+    <RootNamespace>Console_Bitmap</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,31 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="command.cpp" />
-    <ClCompile Include="game_pole.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="sokoban_app.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="command.h" />
-    <ClInclude Include="command_down.h" />
-    <ClInclude Include="command_left.h" />
-    <ClInclude Include="command_right.h" />
-    <ClInclude Include="command_up.h" />
-    <ClInclude Include="game_pole.h" />
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="sokoban_app.h" />
-    <ClInclude Include="sokoban_exception.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="1.bmp" />
-    <Image Include="2.bmp" />
-    <Image Include="3.bmp" />
-    <Image Include="4.bmp" />
-    <Image Include="5.bmp" />
-    <Image Include="6.bmp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
