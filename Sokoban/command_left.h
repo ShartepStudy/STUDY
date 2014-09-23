@@ -7,11 +7,11 @@ namespace sokoban {
 
 class CommandLeft: public Command {
 public:
-  CommandLeft(): Command() {}
+  CommandLeft(): Command(-1, 0) {}
   virtual ~CommandLeft() {}
 
-  virtual bool Execute() { return ExecuteHelper(-1, 0); }
-  virtual bool UnExecute() { return UnExecuteHelper(-1, 0); }
+  //virtual bool Execute() { return ExecuteHelper(); }
+  //virtual bool UnExecute() { return UnExecuteHelper(); }
 };
 
 }               //    namespace sokoban

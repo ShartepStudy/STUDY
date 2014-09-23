@@ -21,6 +21,7 @@ private:
   GamePole& game_pole_;
 
   std::vector<HBITMAP> h_bitmaps_;
+  std::vector<std::vector<HWND> > h_child_wnd_;
 
   DISALLOW_COPY_AND_ASSIGN(Renderer);
 };

@@ -45,14 +45,6 @@ public:
     SokobanException(error_place + "  Error!  GamePole not initialize yet, you should call game_pole.Init()") {}
 };
 
-//class SetPlayerCoordinatesException: SokobanException{
-//public:
-//  SetPlayerCoordinatesException(std::string error_place, int cell_type_by_setted_coordinates) :
-//    SokobanException(error_place + 
-//      "  Error!  You try to set wrong coordinates of player. CellType of setted coordinates is " +
-//      std::to_string(cell_type_by_setted_coordinates)) {}
-//};
-
 }           //    namespace sokoban
 
 #endif      //    SOKOBAN_EXCEPTION_H

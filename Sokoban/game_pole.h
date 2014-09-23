@@ -11,15 +11,17 @@
 namespace sokoban {
 
 enum CellType {
-  MIN_CELL_TYPE = -1,
-  EMPTY         = 0,
-  PLAYER        = 1,
-  BOX           = 2,
-  FREE          = 3,
-  WALL          = 4,
-  BOX_PLACE     = 5,
-  MAX_CELL_TYPE = 6,
-  NEXT_LINE     = 7
+  MIN_CELL_TYPE       = -1,
+  EMPTY               = 0,
+  PLAYER              = 1,
+  BOX                 = 2,
+  FREE                = 3,
+  WALL                = 4,
+  BOX_PLACE           = 5,
+  PLAYER_ON_BOX_PLACE = 6,
+  BOX_ON_BOX_PLACE    = 7,
+  MAX_CELL_TYPE       = 8,
+  NEXT_LINE           = 9
 };
 
 typedef std::pair<CellType, HWND> CellPair;
@@ -42,6 +44,9 @@ public:
 
   size_t GetWidth() const { return width_; }
   size_t GetHeight() const { return height_; }
+
+  CellType GetCell(size_t x, size_t y) const { return pole_[y][x].first; }
+  void SetCell(size_t x, size_t y, CellType data);
 
   std::vector<CellPair>& operator[](size_t index) throw(GamePoleNotInitializeException);
   const std::vector< std::vector<CellPair> >& operator()() const throw(GamePoleNotInitializeException);

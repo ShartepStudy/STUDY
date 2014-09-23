@@ -1,36 +1,41 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "macros.h"
+#include <memory>
 
 #include "game_pole.h"
+#include "macros.h"
 
 namespace sokoban {
 
+class CommandHelper {
+public:
+  virtual bool ExecuteHelper(GamePole* game_pole, int dx, int dy) = 0;
+  virtual bool UnExecuteHelper(GamePole* game_pole, int x, int y) = 0;
+};
+
 class Command {
 public:
-  Command();
+  Command(int dx, int dy);
   virtual ~Command() {}
   
-  virtual bool Execute() = 0;
-  virtual bool UnExecute() = 0;
+  bool Execute() { return command_helper_->ExecuteHelper(game_pole_, dx_, dy_); }
+  bool UnExecute() { return command_helper_->UnExecuteHelper(game_pole_, x_, y_); }
 
   static bool SetGamePole(GamePole* game_pole);
+
 protected:
-  bool ExecuteHelper(int dx, int dy);
-  bool UnExecuteHelper(int dx, int dy);
-
-  CellType GetCell(size_t x, size_t y) const { return (*game_pole_)[y][x].first; }
-  void SetCell(size_t x, size_t y, CellType data);
-
   int x_;
   int y_;
 
-  bool with_box_;
-
-  static GamePole* game_pole_;
+  int dx_;
+  int dy_;
 
 private:
+  static GamePole* game_pole_;
+
+  std::shared_ptr<CommandHelper> command_helper_;
+
   DISALLOW_ASSIGN(Command);
 };
 

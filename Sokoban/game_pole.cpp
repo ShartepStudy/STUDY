@@ -83,7 +83,7 @@ void GamePole::Save(char* file_name) {
 bool GamePole::SetXY(int x, int y) {
   bool rv;
   if (is_initialize_) {
-    rv = (PLAYER == pole_[y][x].first);
+    rv = (PLAYER == pole_[y][x].first || PLAYER_ON_BOX_PLACE == pole_[y][x].first);
   
     if (rv) {
       x_ = x;
@@ -94,6 +94,17 @@ bool GamePole::SetXY(int x, int y) {
   }
   return rv;
 }
+
+void GamePole::SetCell(size_t x, size_t y, CellType data) {
+  if (is_initialize_) {
+    pole_[y][x].first = data;
+  
+    if (PLAYER == data || PLAYER_ON_BOX_PLACE == data) {
+      SetXY(x, y);
+    }
+  }
+}
+
 
 std::vector<CellPair>& GamePole::operator[](size_t index) {
   if (!is_initialize_) {
@@ -115,8 +126,8 @@ void GamePole::DefaultInit() {
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
-                      {0, 4, 3, 3, 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 4, 0},
-                      {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
+                      {0, 4, 3, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 4, 0},
+                      {0, 4, 3, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},
                       {0, 4, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0},

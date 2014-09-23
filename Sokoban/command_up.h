@@ -7,11 +7,11 @@ namespace sokoban {
 
 class CommandUp: public Command {
 public:
-  CommandUp(): Command() {}
+  CommandUp(): Command(0, -1) {}
   virtual ~CommandUp() {}
 
-  virtual bool Execute() { return ExecuteHelper(0, -1); }
-  virtual bool UnExecute() { return UnExecuteHelper(0, -1); }
+  //virtual bool Execute() { return ExecuteHelper(); }
+  //virtual bool UnExecute() { return UnExecuteHelper(); }
 };
 
 }               //    namespace sokoban
