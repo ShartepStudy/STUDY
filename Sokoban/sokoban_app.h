@@ -6,7 +6,7 @@
 
 #include "macros.h"
 #include "game_pole.h"
-#include "renderer.h"
+//#include "renderer.h"
 
 namespace sokoban {
 
@@ -29,15 +29,18 @@ public:
   SokobanApp();
   ~SokobanApp() {};
   
+  bool Init(const std::string& file_name);
   void Run();
 
 private:
-  void UndoHelper(std::shared_ptr<Command>& command);
+//  void UndoHelper(std::shared_ptr<Command>& command);
 
-  GamePole game_pole_;
-  Renderer renderer_;
-  std::stack<std::shared_ptr<Command> > undo_commands_;
-  std::stack<std::shared_ptr<Command> > redo_commands_;
+  GamePole base_map_;
+  GamePole objects_map_;
+
+//  Renderer renderer_;
+//  std::stack<std::shared_ptr<Command> > undo_commands_;
+//  std::stack<std::shared_ptr<Command> > redo_commands_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };

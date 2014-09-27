@@ -7,7 +7,7 @@
 #include "macros.h"
 
 namespace sokoban {
-
+  typedef std::pair<CellType, HWND> CellPair;
 class GamePole;
   
 class Renderer {
