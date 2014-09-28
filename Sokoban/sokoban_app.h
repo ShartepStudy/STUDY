@@ -1,16 +1,18 @@
 #ifndef SOKOBAN_APP_H
 #define SOKOBAN_APP_H
 
-#include <stack>
-#include <memory>
+//#include <stack>
+//#include <memory>
+#include <string>
 
-#include "macros.h"
 #include "game_pole.h"
-//#include "renderer.h"
+#include "macros.h"
+#include "renderer.h"
 
 namespace sokoban {
 
 class Command;
+class Renderer;
 
 enum ButtonCode {
   UP_BUTTON           = 72,
@@ -35,10 +37,10 @@ public:
 private:
 //  void UndoHelper(std::shared_ptr<Command>& command);
 
-  GamePole base_map_;
-  GamePole objects_map_;
+  GamePole<CellType> base_map_;
+  GamePole<CellType> objects_map_;
 
-//  Renderer renderer_;
+  Renderer renderer_;
 //  std::stack<std::shared_ptr<Command> > undo_commands_;
 //  std::stack<std::shared_ptr<Command> > redo_commands_;
 
