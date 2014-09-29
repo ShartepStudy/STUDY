@@ -30,17 +30,13 @@ public:
   GamePole();
   ~GamePole() {}
 
-//  void Init(char* file_name) throw(OpenInputFileException, ReadWrongDataFromFileException);
   //void Save(char* file_name) throw(OpenOutputFileException);
 
-  //bool IsModify() { return is_modify_; }
-  //void SetModify() { is_modify_ = true; }
-  //void SetUnModify() { is_modify_ = false; }
   void SetInitialize(bool is_initialize) { is_initialize_ = is_initialize; }
 
-  //int X() const { return x_; }
-  //int Y() const { return y_; }
-  //bool SetXY(int x, int y);
+  int X() const { return x_; }
+  int Y() const { return y_; }
+  void SetXY(size_t x, size_t y);
 
   void Init(size_t width, size_t height, T data);
   size_t GetWidth() const { return width_; }
@@ -49,9 +45,6 @@ public:
   T GetCell(size_t x, size_t y) const throw(GamePoleNotInitializeException); 
   void SetCell(size_t x, size_t y, T data) throw(GamePoleNotInitializeException);
 
-  //std::vector<CellPair>& operator[](size_t index) throw(GamePoleNotInitializeException);
-  //const std::vector< std::vector<CellPair> >& operator()() const throw(GamePoleNotInitializeException);
-  
   //void DefaultInit();
 
 private:
@@ -60,17 +53,19 @@ private:
   size_t width_;
   size_t height_;
 
-//  bool is_modify_;
+  size_t x_;
+  size_t y_;
+
   bool is_initialize_;
 
   DISALLOW_COPY_AND_ASSIGN(GamePole);
 };
 
-}   // namespace sokoban
+} // namespace sokoban
 
 #ifndef GAME_POLE_CPP
 #include "game_pole.cpp"
 #endif
 
-#endif    //  GAME_POLE_H
+#endif //  GAME_POLE_H
 

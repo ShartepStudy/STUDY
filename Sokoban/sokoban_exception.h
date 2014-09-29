@@ -45,6 +45,12 @@ public:
     SokobanException(error_place + "  Error!  GamePole not initialize yet, you should call game_pole.Init()") {}
 };
 
-}           //    namespace sokoban
+class NullPointerException: SokobanException {
+public:
+  NullPointerException(std::string error_place):
+    SokobanException(error_place + "  Error! You try to use null pointer!") {}
+};
 
-#endif      //    SOKOBAN_EXCEPTION_H
+} //  namespace sokoban
+
+#endif //  SOKOBAN_EXCEPTION_H

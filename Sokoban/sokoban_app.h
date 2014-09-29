@@ -1,8 +1,8 @@
 #ifndef SOKOBAN_APP_H
 #define SOKOBAN_APP_H
 
-//#include <stack>
-//#include <memory>
+#include <stack>
+#include <memory>
 #include <string>
 
 #include "game_pole.h"
@@ -35,14 +35,14 @@ public:
   void Run();
 
 private:
-//  void UndoHelper(std::shared_ptr<Command>& command);
+  void UndoHelper(std::shared_ptr<Command>& command);
 
   GamePole<CellType> base_map_;
   GamePole<CellType> objects_map_;
 
   Renderer renderer_;
-//  std::stack<std::shared_ptr<Command> > undo_commands_;
-//  std::stack<std::shared_ptr<Command> > redo_commands_;
+  std::stack<std::shared_ptr<Command> > undo_commands_;
+  std::stack<std::shared_ptr<Command> > redo_commands_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };

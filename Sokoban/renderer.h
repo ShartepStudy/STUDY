@@ -8,7 +8,6 @@
 #include "macros.h"
 
 namespace sokoban {
-//  typedef std::pair<CellType, HWND> CellPair;
   
 class Renderer {
 public:
@@ -33,6 +32,6 @@ private:
   DISALLOW_COPY_AND_ASSIGN(Renderer);
 };
 
-}           //    namespace sokoban
+} //  namespace sokoban
 
-#endif      //    RENDERER_H
+#endif //  RENDERER_H

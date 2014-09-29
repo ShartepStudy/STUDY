@@ -13,11 +13,11 @@ Renderer::Renderer(GamePole<CellType>& base_map, GamePole<CellType>& objects_map
 {
   for(int i=0; i<MAX_CELL_TYPE; ++i) {
     h_bitmaps_[i] = ((HBITMAP)(LoadImageA(NULL, 
-                                                     (std::to_string(i) + ".bmp").c_str(), 
-                                                     IMAGE_BITMAP, 
-                                                     0, 
-                                                     0, 
-                                                     LR_LOADFROMFILE | LR_CREATEDIBSECTION)));
+                                          (std::to_string(i) + ".bmp").c_str(), 
+                                          IMAGE_BITMAP, 
+                                          0, 
+                                          0, 
+                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION)));
   }
 }
 
@@ -51,8 +51,6 @@ void Renderer::Init() {
 void Renderer::Show() {
   //  SetConsoleTitleA("JAPAN");
 
-//  if (game_pole_.IsModify()) {
-
   for (size_t y = 0; y < height_; ++y) {
     for (size_t x = 0; x < width_; ++x) {
       LPARAM h_bitmap;
@@ -74,8 +72,6 @@ void Renderer::Show() {
                   h_bitmap);
     }
   }
-//  game_pole_.SetUnModify();
-//  }
 }
 
-}     //    namespace sokoban
+} //  namespace sokoban
