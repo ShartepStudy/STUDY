@@ -1,9 +1,7 @@
 #ifndef GAME_POLE_H
 #define GAME_POLE_H
 
-//#include <utility>
 #include <vector>
-//#include <windows.h>
 
 #include "macros.h"
 #include "sokoban_exception.h"

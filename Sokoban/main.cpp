@@ -2,6 +2,5 @@
 
 void main() {
    sokoban::SokobanApp app;
-   app.Init("level_8.dat");
    app.Run();
 }
