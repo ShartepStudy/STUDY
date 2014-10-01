@@ -74,4 +74,21 @@ void Renderer::Show() {
   }
 }
 
+void Renderer::ShowCell(size_t x, size_t y, CellType cell_type) {
+  SendMessage(h_child_wnd_.GetCell(x, y),
+              (UINT)STM_SETIMAGE,
+              (WPARAM)IMAGE_BITMAP,
+              (LPARAM)h_bitmaps_[cell_type]);
+}
+
+void Renderer::SetCursor(size_t x, size_t y) {
+  COORD position;
+  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  position.X = x;
+  position.Y = y;
+
+  SetConsoleCursorPosition(hConsole, position);
+}
+
 } //  namespace sokoban

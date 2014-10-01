@@ -22,26 +22,6 @@ void GamePole<T>::Init(size_t width, size_t height, T data) {
   pole_.resize(height, vector_x);
 }
 
-//void GamePole::Save(char* file_name) {
-//  if (is_initialize_) {
-//    std::ofstream file(file_name);
-//
-//    if (!file.is_open()) {
-//      throw OpenOutputFileException("gamepole::save", file_name);
-//    }
-//
-//    file << static_cast<char>(width_);
-//    file << static_cast<char>(height_);
-//    for (auto it_y : pole_) {
-//      for (auto it_x: it_y) {
-//        file << static_cast<char>(it_x);
-//      }
-//      file << static_cast<char>(NEXT_LINE);
-//    }
-//    file.close();
-//  }
-//}
-
 template<typename T>
 void GamePole<T>::SetXY(size_t x, size_t y) {
   if (PLAYER == pole_[y][x]) {

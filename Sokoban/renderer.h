@@ -16,6 +16,8 @@ public:
 
   void Init();
   void Show();
+  void ShowCell(size_t x, size_t y, CellType cell_type);
+  void SetCursor(size_t x, size_t y);
 
 private:
   const size_t kImgStep_;

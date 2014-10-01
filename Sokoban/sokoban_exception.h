@@ -20,6 +20,12 @@ private:
   std::string error_data_;
 };
 
+class SaveFileException: SokobanException {
+public:
+  SaveFileException(std::string error_place, std::string file_name):
+    SokobanException(error_place + "  Error!  Can't save file " + file_name) {}
+};
+
 class OpenInputFileException: SokobanException {
 public:
   OpenInputFileException(std::string error_place, std::string file_name):

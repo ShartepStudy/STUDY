@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 
+#include "button_code.h"
 #include "game_pole.h"
 #include "macros.h"
 #include "renderer.h"
@@ -13,18 +14,6 @@ namespace sokoban {
 
 class Command;
 class Renderer;
-
-enum ButtonCode {
-  UP_BUTTON           = 72,
-  LEFT_BUTTON         = 75,
-  RIGHT_BUTTON        = 77,
-  DOWN_BUTTON         = 80,
-  R_BUTTON            = 82,
-  U_BUTTON            = 85,
-  r_BUTTON            = 114,
-  u_BUTTON            = 117,
-  EXTENDED_BUTTONS    = 224
-};
 
 class Game {
 public:
