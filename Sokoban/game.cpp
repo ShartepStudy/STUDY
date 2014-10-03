@@ -16,7 +16,8 @@ Game::Game():
     objects_map_(),
     renderer_(base_map_, objects_map_),
     undo_commands_(),
-    redo_commands_()
+    redo_commands_(),
+    step_count_(0)
 {
   Command::SetGamePole(&base_map_, &objects_map_);
 }
@@ -65,8 +66,6 @@ void Game::Init(const std::string& file_name) {
 }
 
 void Game::Run() {
-  //base_map_.DefaultInit();
-  //base_map_.Save("level_8.dat");
   renderer_.Show();
   do {
     Sleep(10);
@@ -102,6 +101,7 @@ void Game::Run() {
         undo_commands_.pop();
         command->UnExecute();
         redo_commands_.push(command);
+        --step_count_;
       }
       break;
     case R_BUTTON:
@@ -111,6 +111,7 @@ void Game::Run() {
         redo_commands_.pop();
         command->Execute();
         undo_commands_.push(command);
+        ++step_count_;
       }
       break;
     }
@@ -118,7 +119,6 @@ void Game::Run() {
     renderer_.Show();
   } while(!IsFinish());
 
-  Sleep(1000);
   LevelComplete();
 }
 
@@ -128,6 +128,7 @@ void Game::UndoHelper(std::shared_ptr<Command>& command) {
     if (!redo_commands_.empty()) {
       redo_commands_ = std::stack<std::shared_ptr<Command> >();
     }
+    ++step_count_;
   }
 }
 
@@ -143,7 +144,8 @@ bool Game::IsFinish() {
 }
 
 void Game::LevelComplete() {
-  puts("YOU WIN !!!\n");
+  printf("\n\n\n\n\tYOU WIN !!! You made %d steps! To continue press any key.\n", step_count_);
+  getch();
 }
 
 } //  namespace sokoban

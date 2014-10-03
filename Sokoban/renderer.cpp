@@ -21,6 +21,18 @@ Renderer::Renderer(GamePole<CellType>& base_map, GamePole<CellType>& objects_map
   }
 }
 
+Renderer::~Renderer() {
+  for (size_t y = 0; y < height_; ++y) {
+    for (size_t x = 0; x < width_; ++x) {
+      DestroyWindow(h_child_wnd_.GetCell(x, y));
+    }
+  }
+
+  for (auto it : h_bitmaps_) {
+    DeleteObject(it);
+  }
+}
+
 void Renderer::Init() {
   width_ = base_map_.GetWidth();
   height_ = base_map_.GetHeight();

@@ -11,20 +11,13 @@ enum ButtonCode {
   LEFT_BUTTON = 75,
   RIGHT_BUTTON = 77,
   DOWN_BUTTON = 80,
-//  B_BUTTON = 66, 
-//  F_BUTTON = 70,
-//  P_BUTTON = 80,
+  ONE_BUTTON = 49, 
+  TWO_BUTTON = 50,
+  THREE_BUTTON = 51,
   R_BUTTON = 82,
-//  T_BUTTON = 84,
   U_BUTTON = 85,
-  //W_BUTTON = 87,
-  //b_BUTTON = 98,
-  //f_BUTTON = 102,
-  //p_BUTTON = 112,
   r_BUTTON = 114,
-//  t_BUTTON = 116,
   u_BUTTON = 117,
-//  w_BUTTON = 119,
   EXTENDED_BUTTONS = 224
 };
 

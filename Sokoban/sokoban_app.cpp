@@ -1,6 +1,9 @@
 #include "sokoban_app.h"
 
+#include <conio.h>
 #include <iostream>
+
+#include "button_code.h"
 
 namespace sokoban {
 
@@ -10,25 +13,34 @@ SokobanApp::SokobanApp():
 {}
 
 void SokobanApp::Run() {
-  system("cls");
+  bool is_finish = false;
 
-  size_t menu_number = 0;
-  std::cout << "\n\t\t1. Play Game.\n\n\t\t2. Create Map. \n\n\t\tEnter your choice: ";
-  std::cin >> menu_number;
+  do {
+    system("cls");
 
-  if (1 == menu_number) {
+    size_t menu_number;
+    std::cout << "\n\t\t1. Play Game.\n\n\t\t2. Create Map. \n\n\t\t3. Exit.\n\n\t\tEnter your choice: ";
+    menu_number = getch();
+
     int level_number = 0;
-    std::cout << "\n\n\t\t Enter level number: ";
-    std::cin >> level_number;
-
     std::string file_name("level-");
-    file_name += std::to_string(level_number) + ".map";
-    game_.Init(file_name);
-    game_.Run();
-  } else if (2 == menu_number) {
-    map_creator_.Run();
-  }
+    switch (menu_number) {
+    case ONE_BUTTON:
+      std::cout << "\n\n\t\t Enter level number: ";
+      level_number = getch();
 
+      file_name += std::to_string(level_number-48) + ".map";
+      game_.Init(file_name);
+      game_.Run();
+      break;
+    case TWO_BUTTON:
+      map_creator_.Run();
+      break;
+    case THREE_BUTTON:
+      is_finish = true;
+      break;
+    }
+  } while (!is_finish);
   std::cout << "\n\n\n\n\n\n\n\n";
 }
 

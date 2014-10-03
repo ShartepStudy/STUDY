@@ -17,9 +17,8 @@ enum CellType {
   WALL                = 4,
   BOX_PLACE           = 5,
   PLAYER_ON_BOX_PLACE = 6,
-  BOX_ON_BOX_PLACE    = 7,
-  MAX_CELL_TYPE       = 8,
-  NEXT_LINE           = 9
+  MAX_CELL_TYPE       = 7,
+  NEXT_LINE           = 8
 };
 
 template<typename T>

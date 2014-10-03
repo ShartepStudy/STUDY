@@ -49,7 +49,7 @@ void MapCreator::Run() {
         break;
       case SPACE_BUTTON:
         cell_type = static_cast<CellType>(static_cast<int>(cell_type)+1);
-        if (MAX_CELL_TYPE == cell_type) cell_type = EMPTY;
+        if (PLAYER_ON_BOX_PLACE == cell_type) cell_type = EMPTY;
         break;
       case UP_BUTTON:
         if (y) --y;
@@ -74,9 +74,11 @@ void MapCreator::Run() {
   }
 
   renderer_.SetCursor(4, 60);
-  std::cout << "Enter file name [level-*.map]: ";
-  std::string file_name;
-  std::cin >> file_name;
+  std::cout << "Enter level number : ";
+  std::string file_name("level-");
+  int n = 0;
+  std::cin >> n;
+  file_name.append(std::to_string(n) + ".map");
   SaveMap(file_name);
 }
 

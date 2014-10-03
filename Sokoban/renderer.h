@@ -12,7 +12,7 @@ namespace sokoban {
 class Renderer {
 public:
   Renderer(GamePole<CellType>& base_map, GamePole<CellType>& objects_map);
-  ~Renderer() {};
+  ~Renderer();
 
   void Init();
   void Show();
