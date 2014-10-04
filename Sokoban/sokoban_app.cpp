@@ -8,8 +8,7 @@
 namespace sokoban {
 
 SokobanApp::SokobanApp():
-    game_(),
-    map_creator_()
+    renderer_()
 {}
 
 void SokobanApp::Run() {
@@ -19,26 +18,31 @@ void SokobanApp::Run() {
     system("cls");
 
     size_t menu_number;
-    std::cout << "\n\t\t1. Play Game.\n\n\t\t2. Create Map. \n\n\t\t3. Exit.\n\n\t\tEnter your choice: ";
-    menu_number = getch();
+    std::cout << "\n\n\t\t1. Play Game.\n\n\t\t2. Create Map. \n\n\t\t3. Exit.\n\n\t\tEnter your choice: ";
+    std::cin >> menu_number;
+    getchar();
 
-    int level_number = 0;
-    std::string file_name("level-");
-    switch (menu_number) {
-    case ONE_BUTTON:
-      std::cout << "\n\n\t\t Enter level number: ";
-      level_number = getch();
+    if (1 == menu_number) {
+      int level_number = 0;
+      std::string file_name("level-");
+      std::cout << "\n\n\t\tEnter level number: ";
+      std::cin >> level_number;
+      getchar();
+      system("cls");
 
-      file_name += std::to_string(level_number-48) + ".map";
-      game_.Init(file_name);
-      game_.Run();
-      break;
-    case TWO_BUTTON:
-      map_creator_.Run();
-      break;
-    case THREE_BUTTON:
+      file_name += std::to_string(level_number) + ".map";
+      
+      Game game(&renderer_);
+      game.Init(file_name);
+      game.Run();
+    } else if (2 == menu_number) {
+      MapCreator map_creator(&renderer_);
+      map_creator.Run();
+    } else if (3 == menu_number) {
       is_finish = true;
-      break;
+    } else {
+      std::cout << "\n\n\t\tWrong menu number! Try again.";
+      Sleep(2000);
     }
   } while (!is_finish);
   std::cout << "\n\n\n\n\n\n\n\n";

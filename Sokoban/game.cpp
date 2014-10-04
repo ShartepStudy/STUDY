@@ -2,6 +2,7 @@
 
 #include <conio.h>
 #include <fstream>
+#include <iostream>
 
 #include "command.h"
 #include "command_down.h"
@@ -11,10 +12,10 @@
 
 namespace sokoban {
 
-Game::Game():
+Game::Game(Renderer* renderer):
     base_map_(),
     objects_map_(),
-    renderer_(base_map_, objects_map_),
+    renderer_(renderer),
     undo_commands_(),
     redo_commands_(),
     step_count_(0)
@@ -62,11 +63,12 @@ void Game::Init(const std::string& file_name) {
   file.close();
   base_map_.SetInitialize(true);
   objects_map_.SetInitialize(true);
-  renderer_.Init();
+  renderer_->Init(&base_map_, &objects_map_);
 }
 
 void Game::Run() {
-  renderer_.Show();
+  renderer_->Show();
+  bool is_finish = false;
   do {
     Sleep(10);
 
@@ -114,12 +116,21 @@ void Game::Run() {
         ++step_count_;
       }
       break;
+    case ESC_BUTTON:
+      is_finish = true;
+      //is_finish = LevelEscape();
+      //system("cls");
+      break;
     }
 
-    renderer_.Show();
-  } while(!IsFinish());
+    renderer_->Show();
+  } while(!IsFinish() && !is_finish);
 
-  LevelComplete();
+  if (!is_finish) {
+    LevelComplete();
+  } else {
+    renderer_->ClearScreen();
+  }
 }
 
 void Game::UndoHelper(std::shared_ptr<Command>& command) {
@@ -144,8 +155,16 @@ bool Game::IsFinish() {
 }
 
 void Game::LevelComplete() {
-  printf("\n\n\n\n\tYOU WIN !!! You made %d steps! To continue press any key.\n", step_count_);
+  renderer_->ClearScreen();
+  printf("\n\n\n\n\tYOU WIN !!! You make %d steps! For continue press any key.\n", step_count_);
   getch();
+}
+
+bool Game::LevelEscape() {
+  renderer_->ClearScreen();
+  puts("\n\n\n\n   You press Esc, Are you shure You want to finish this level? (y/n): ");
+  char c = getch();
+  return ('y' == c || 'Y' == c); 
 }
 
 } //  namespace sokoban

@@ -17,8 +17,9 @@ enum CellType {
   WALL                = 4,
   BOX_PLACE           = 5,
   PLAYER_ON_BOX_PLACE = 6,
-  MAX_CELL_TYPE       = 7,
-  NEXT_LINE           = 8
+  BLACK               = 7,
+  NEXT_LINE           = 8,
+  MAX_CELL_TYPE       = 9
 };
 
 template<typename T>
@@ -26,8 +27,6 @@ class GamePole {
 public:
   GamePole();
   ~GamePole() {}
-
-  //void Save(char* file_name) throw(OpenOutputFileException);
 
   void SetInitialize(bool is_initialize) { is_initialize_ = is_initialize; }
 
@@ -41,8 +40,6 @@ public:
 
   T GetCell(size_t x, size_t y) const throw(GamePoleNotInitializeException); 
   void SetCell(size_t x, size_t y, T data) throw(GamePoleNotInitializeException);
-
-  //void DefaultInit();
 
 private:
   std::vector< std::vector<T> > pole_;

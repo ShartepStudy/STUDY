@@ -17,7 +17,7 @@ class Renderer;
 
 class Game {
 public:
-  Game();
+  Game(Renderer* renderer);
   ~Game() {}
   
   void Init(const std::string& file_name) throw (OpenInputFileException, ReadWrongDataFromFileException);
@@ -27,12 +27,13 @@ private:
   void UndoHelper(std::shared_ptr<Command>& command);
   bool IsFinish();
   void LevelComplete();
+  bool LevelEscape();
 
   GamePole<CellType> base_map_;
   GamePole<CellType> objects_map_;
   size_t step_count_;
 
-  Renderer renderer_;
+  Renderer* renderer_;
   std::stack<std::shared_ptr<Command> > undo_commands_;
   std::stack<std::shared_ptr<Command> > redo_commands_;
 

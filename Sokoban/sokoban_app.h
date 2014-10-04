@@ -15,8 +15,9 @@ public:
   void Run();
 
 private:
-  Game game_;
-  MapCreator map_creator_;
+  Renderer renderer_;
+//  Game game_;
+//  MapCreator map_creator_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };

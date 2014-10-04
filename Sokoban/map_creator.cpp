@@ -6,27 +6,27 @@
 
 namespace sokoban {
 
-MapCreator::MapCreator():
+MapCreator::MapCreator(Renderer* renderer):
     width_(0),
     height_(0),
     base_map_(),
     objects_map_(),
-    renderer_(base_map_, objects_map_)
+    renderer_(renderer)
 {}
 
 MapCreator::~MapCreator() {}
 
 void MapCreator::Run() {
   if (!InitSize()) {
-    std::cout << "You enter wrong data more then 3 times! Exit from Map Creation!\n";
+    std::cout << "\n\n\tYou enter wrong data more then 3 times! Exit from Map Creation!\n";
   } else {
+    system("cls");
     base_map_.Init(width_, height_, EMPTY);
     base_map_.SetInitialize(true);
     objects_map_.Init(width_, height_, EMPTY);
     objects_map_.SetInitialize(true);
-    system("cls");
-    renderer_.Init();
-    renderer_.Show();
+    renderer_->Init(&base_map_, &objects_map_);
+    renderer_->Show();
     
     bool is_finish = false;
     CellType cell_type = EMPTY;
@@ -34,9 +34,9 @@ void MapCreator::Run() {
     do {
       Sleep(10);
 
-      int btnCode = getch();
+      int btnCode = _getch();
       if (EXTENDED_BUTTONS == btnCode) {
-        btnCode = getch();
+        btnCode = _getch();
       }
 
       switch (btnCode) {
@@ -45,6 +45,9 @@ void MapCreator::Run() {
           objects_map_.SetCell(x, y, cell_type);
         } else {
           base_map_.SetCell(x, y, cell_type);
+          if (objects_map_.GetCell(x, y) != EMPTY) {
+            objects_map_.SetCell(x, y, EMPTY);
+          }
         }
         break;
       case SPACE_BUTTON:
@@ -68,16 +71,18 @@ void MapCreator::Run() {
         break;
       }
 
-      renderer_.Show();
-      renderer_.ShowCell(x, y, cell_type);
+      renderer_->Show();
+      renderer_->ShowCell(x, y, cell_type);
     } while (!is_finish);
   }
 
-  renderer_.SetCursor(4, 60);
-  std::cout << "Enter level number : ";
+  renderer_->ClearScreen();
+ 
+  std::cout << "\n\n\t\tEnter level number : ";
   std::string file_name("level-");
   int n = 0;
   std::cin >> n;
+  getchar();
   file_name.append(std::to_string(n) + ".map");
   SaveMap(file_name);
 }
@@ -88,10 +93,10 @@ bool MapCreator::InitSize() {
     if (i > 0) {
       std::cout << "\n\n\t\tYou enter wrong data try again!\n";
     }
-    std::cout << "\n\n\t\tEnter map width 5-50: ";
+    std::cout << "\n\n\t\tEnter map width 5-30: ";
     std::cin >> width_;
     ++i;
-  } while (!(width_ >= 5 && width_ <= 50) && i < 3);
+  } while (!(width_ >= 5 && width_ <= 30) && i < 3);
 
   if (i >= 3) return false;
 
@@ -100,10 +105,10 @@ bool MapCreator::InitSize() {
     if (i > 0) {
       std::cout << "\n\n\t\tYou enter wrong data try again!\n";
     }
-    std::cout << "\n\n\t\tEnter map height 5-50: ";
+    std::cout << "\n\n\t\tEnter map height 5-30: ";
     std::cin >> height_;
     ++i;
-  } while (!(height_ >= 5 && height_ <= 50) && i < 3);
+  } while (!(height_ >= 5 && height_ <= 30) && i < 3);
 
   if (i >= 3) return false;
   return true;

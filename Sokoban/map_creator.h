@@ -10,7 +10,7 @@ namespace sokoban {
 
 class MapCreator {
  public:
-  MapCreator();
+  MapCreator(Renderer* renderer);
   ~MapCreator();
 
   void Run();
@@ -24,7 +24,7 @@ class MapCreator {
 
   GamePole<CellType> base_map_;
   GamePole<CellType> objects_map_;
-  Renderer renderer_;
+  Renderer* renderer_;
 };
 
 }  // namespace sokoban 

@@ -97,5 +97,11 @@
     <Image Include="1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Debug\0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Debug\7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
