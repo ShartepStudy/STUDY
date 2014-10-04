@@ -45,7 +45,7 @@ void CMyArray<T>::resize( unsigned int size )
    
    mAllocatedSize = size;
 
-   int * tmpArray = new T[mAllocatedSize];
+   T * tmpArray = new T[mAllocatedSize];
    for (size_t i = 0; i < mSize; i++)
       tmpArray[i] = mArray[i];
 
