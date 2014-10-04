@@ -32,10 +32,10 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdLine, int 
 		szClassWindow,
 		TEXT("Обработка событий мышки и клавиатуры"),
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
+		0,
+		0,
+		400,
+		400,
 		NULL,
 		NULL,
 		hInst,
@@ -55,47 +55,42 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdLine, int 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
 	TCHAR str[50];
+	HWND hw;
+
 	switch (uMessage)
 	{
-	case WM_LBUTTONDBLCLK:
-		MessageBox(0,
-			TEXT("Двойной щелчок левой кнопкой мыши"),
-			TEXT("WM_LBUTTONDBLCLK"),
-			MB_OK | MB_ICONINFORMATION);
-		break;
+
 	case WM_LBUTTONDOWN:
-		MessageBox(
-			0,
-			TEXT("Нажата левая кнопка мыши"),
-			TEXT("WM_LBUTTONDOWN"),
+		RECT r;
+		GetWindowRect(hWnd, &r);
+		wsprintf(str, TEXT("X1=%d Y1=%d X2=%d Y2=%d"), r.left, r.top, r.right, r.bottom);
+
+		MessageBox(0,
+			str,
+			L"Координаты окна",
 			MB_OK | MB_ICONINFORMATION);
-		break;
-	case WM_LBUTTONUP:
-		MessageBox(
-			0,
-			TEXT("Отпущена левая кнопка мыши"),
-			TEXT("WM_LBUTTONUP"),
+
+		GetClientRect(hWnd, &r);
+		wsprintf(str, TEXT("X1=%d Y1=%d X2=%d Y2=%d"), r.left, r.top, r.right, r.bottom);
+
+		MessageBox(0,
+			str,
+			L"Координаты клиентской области окна",
 			MB_OK | MB_ICONINFORMATION);
+
+		////////////
+
+		MoveWindow(hWnd, 50, 50, 200, 200, true);
+
+		////////////
+
+		hw = FindWindow(L"CalcFrame", L"Калькулятор");
+		BringWindowToTop(hw);
+		MoveWindow(hw, 150, 150, 200, 200, true);
+
 		break;
-	case WM_RBUTTONDOWN:
-		MessageBox(
-			0,
-			TEXT("Нажата правая кнопка мыши"),
-			TEXT("WM_RBUTTONDOWN"),
-			MB_OK | MB_ICONINFORMATION);
-		break;
-	case WM_MOUSEMOVE:
-		wsprintf(str, TEXT("X=%d  Y=%d"), LOWORD(lParam), HIWORD(lParam));
-		SetWindowText(hWnd, str);
-		break;
-	case WM_CHAR:
-		wsprintf(str, TEXT("Нажата клавиша %c"), (wchar_t)wParam);	// ASCII-код нажатой клавиши
-		MessageBox(0, str, TEXT("WM_CHAR"), MB_OK | MB_ICONINFORMATION);
-		break;
-	case WM_KEYDOWN:
-		wsprintf(str, TEXT("Код клавиши %d"), (int)wParam);
-		MessageBox(0, str, TEXT("WM_KEYDOWN"), MB_OK | MB_ICONINFORMATION);
-		break;
+
+
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

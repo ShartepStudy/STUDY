@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2F4B7EF9-0B6E-4E34-AFE1-96871CC4ED8F}</ProjectGuid>
+    <ProjectGuid>{40AE3783-7EDA-4896-98F0-DB54A35DF77C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Sokoban</RootNamespace>
+    <RootNamespace>enum_child_windows</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -51,10 +51,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -66,48 +66,17 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="command.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="game_pole.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="map_creator.cpp" />
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="sokoban_app.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="button_code.h" />
-    <ClInclude Include="command.h" />
-    <ClInclude Include="command_down.h" />
-    <ClInclude Include="command_left.h" />
-    <ClInclude Include="command_right.h" />
-    <ClInclude Include="command_up.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="game_pole.h" />
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="map_creator.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="sokoban_app.h" />
-    <ClInclude Include="sokoban_exception.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="1.bmp" />
-    <Image Include="2.bmp" />
-    <Image Include="3.bmp" />
-    <Image Include="4.bmp" />
-    <Image Include="5.bmp" />
-    <Image Include="6.bmp" />
-    <Image Include="Debug\0.bmp" />
-    <Image Include="Debug\7.bmp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

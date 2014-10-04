@@ -6,14 +6,14 @@
 namespace sokoban {
 
 class CommandDown: public Command {
-public:
-  CommandDown(): Command(0, 1) {}
+ public:
+  CommandDown(): Command() {}
   virtual ~CommandDown() {}
 
-  //virtual bool Execute() { return ExecuteHelper(); }
-  //virtual bool UnExecute() { return UnExecuteHelper(); }
+  virtual bool Execute() { return ExecuteHelper(0, 1); }
+  virtual bool UnExecute() { return UnExecuteHelper(0, 1); }
 };
 
-}               //    namespace sokoban
+} //  namespace sokoban
 
-#endif          //    COMMAND_DOWN_H
+#endif //  COMMAND_DOWN_H

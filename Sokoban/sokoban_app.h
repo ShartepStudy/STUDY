@@ -1,28 +1,11 @@
 #ifndef SOKOBAN_APP_H
 #define SOKOBAN_APP_H
 
-#include <stack>
-#include <memory>
-
+#include "game.h"
+#include "map_creator.h"
 #include "macros.h"
-#include "game_pole.h"
-#include "renderer.h"
 
 namespace sokoban {
-
-class Command;
-
-enum ButtonCode {
-  UP_BUTTON           = 72,
-  LEFT_BUTTON         = 75,
-  RIGHT_BUTTON        = 77,
-  DOWN_BUTTON         = 80,
-  R_BUTTON            = 82,
-  U_BUTTON            = 85,
-  r_BUTTON            = 114,
-  u_BUTTON            = 117,
-  EXTENDED_BUTTONS    = 224
-};
 
 class SokobanApp {
 public:
@@ -32,16 +15,13 @@ public:
   void Run();
 
 private:
-  void UndoHelper(std::shared_ptr<Command>& command);
-
-  GamePole game_pole_;
   Renderer renderer_;
-  std::stack<std::shared_ptr<Command> > undo_commands_;
-  std::stack<std::shared_ptr<Command> > redo_commands_;
+//  Game game_;
+//  MapCreator map_creator_;
 
   DISALLOW_COPY_AND_ASSIGN(SokobanApp);
 };
 
-}   // namespace sokoban
+} //  namespace sokoban
 
-#endif    //  SOKOBAN_APP_H
+#endif //  SOKOBAN_APP_H
