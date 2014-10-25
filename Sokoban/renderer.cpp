@@ -117,8 +117,8 @@ void Renderer::ShowCell(size_t x, size_t y, CellType cell_type) {
 }
 
 void Renderer::ClearScreen() {
-  for (size_t y = 0; y < max_height_; y++) {
-    for (size_t x = 0; x < max_width_; x++) {
+  for (size_t y = 1; y < max_height_-1; y++) {
+    for (size_t x = 1; x < max_width_-1; x++) {
       SendMessage(h_child_wnd_.GetCell(x, y),
                   (UINT)STM_SETIMAGE,
                   (WPARAM)IMAGE_BITMAP,
