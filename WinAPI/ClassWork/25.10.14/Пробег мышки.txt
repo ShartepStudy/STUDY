@@ -1,0 +1,87 @@
+#include "windows.h"
+#include "math.h"
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+wchar_t szClassName[] = L"MyClass";
+
+
+int oldY = -1, oldX = -1;
+int x = 0, y = 0;
+double distance = 0;
+
+int WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
+{
+	
+	WNDCLASSEX wcx;
+	MSG msg;
+	HWND wnd = 0;
+
+	wcx.cbSize = sizeof(wcx);
+	wcx.cbClsExtra = 0;
+	wcx.cbWndExtra = 0;
+	wcx.hIconSm = 0;
+	wcx.hIcon = 0;
+	wcx.lpszMenuName = 0;
+	wcx.style = CS_HREDRAW | CS_VREDRAW;
+	wcx.lpfnWndProc = WndProc;
+	wcx.hInstance = hInstance;
+	wcx.hCursor = LoadCursor(0, IDC_ARROW);
+	wcx.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	wcx.lpszClassName = szClassName;
+	RegisterClassEx(&wcx);
+	wnd = CreateWindowEx(0,szClassName, L"MyFirstWindow", WS_OVERLAPPEDWINDOW, 0, 0, 200, 200, 0, 0, hInstance, 0);
+	ShowWindow(wnd, SW_SHOW);
+	UpdateWindow(wnd);
+
+	while(GetMessage(&msg, 0, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return (int)msg.wParam;
+}
+
+void Process(HWND);
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch(msg)
+	{
+	case WM_MOUSEMOVE:
+		x = LOWORD(lParam);
+		y = HIWORD(lParam);
+		Process(hWnd);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+	}
+
+	return 0;
+}
+
+
+void Process(HWND hWnd)
+{
+	if(oldX == -1 && oldY == -1)
+	{
+		oldX = x;
+		oldY = y;
+		return;
+	}
+
+	int tmp = ( (oldX-x)*(oldX-x) ) + ( (oldY-y)*(oldY-y) );
+	double smallDistance = sqrt((double)tmp);
+	distance += smallDistance;
+
+	//wstring str;
+	wchar_t buf[32];
+	_itow((int)distance, buf, 10);
+	SetWindowText(hWnd, buf);
+
+	oldX = x;
+	oldY = y;
+
+}

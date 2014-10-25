@@ -1,0 +1,8 @@
+BOOL ProgressControlDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) 
+{
+
+	HWND hProgress=CreateWindowEx(0,PROGRESS_CLASS,NULL,WS_CHILD|WS_VISIBLE|PBS_SMOOTH,
+		20,20,250,30,hwnd,NULL,NULL,NULL);
+
+	return TRUE;
+}
