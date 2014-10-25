@@ -1,0 +1,1 @@
+SendMessage(hProgress, PBM_SETBKCOLOR, 0, LPARAM(RGB(red,green,blue)));

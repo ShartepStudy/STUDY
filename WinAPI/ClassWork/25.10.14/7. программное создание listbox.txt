@@ -1,0 +1,33 @@
+#include <windows.h>
+#include "resource.h"
+
+BOOL CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM);
+
+HINSTANCE hIns;
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpszCmdLine, int nCmdShow)
+{
+	hIns=hInstance;
+	// главное окно приложения на основе модального диалога
+	DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, DlgProc); 
+}
+
+BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
+{
+	switch(message)
+	{
+	case WM_CLOSE: // не WM_DESTROY!
+		EndDialog(hWnd, 0); // закрыть модальный диалог
+		return TRUE;
+	case WM_INITDIALOG:
+		HWND hl=CreateWindowEx(WS_EX_CLIENTEDGE,L"LISTBOX",0,WS_CHILD|WS_VISIBLE |LBS_SORT|LBS_NOTIFY,0,0,200,200,hWnd,(HMENU)500,hIns,0);
+
+		SendMessage(hl, LB_ADDSTRING, 0, LPARAM(TEXT("Милан Италия")));
+		SendMessage(hl, LB_ADDSTRING, 0, LPARAM(TEXT("Ливерпуль Англия")));
+		SendMessage(hl, LB_ADDSTRING, 0, LPARAM(TEXT("Бавария Германия")));
+		SendMessage(hl, LB_ADDSTRING, 0, LPARAM(TEXT("Барселона Испания")));
+
+		return TRUE;
+	}
+	return FALSE;
+}

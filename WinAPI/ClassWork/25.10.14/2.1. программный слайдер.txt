@@ -1,0 +1,7 @@
+BOOL CSliderControlDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) 
+{
+	HWND hSlider=CreateWindowEx(0,TRACKBAR_CLASS,NULL,WS_CHILD|WS_VISIBLE|TBS_TOOLTIPS,
+		20,20,100,30,hwnd,NULL,NULL,NULL);
+
+	return TRUE;
+}

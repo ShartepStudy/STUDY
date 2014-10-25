@@ -1,0 +1,6 @@
+BOOL CSpinControlDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) 
+{
+	HWND hSpin=CreateWindowEx(0,UPDOWN_CLASS,NULL,WS_CHILD|WS_VISIBLE|UDS_AUTOBUDDY|UDS_SETBUDDYINT,
+		70,20,0,20,hwnd,NULL,NULL,NULL);
+	return TRUE;
+}

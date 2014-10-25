@@ -1,0 +1,7 @@
+RECT r;
+SendMessage(hStatus, SB_GETRECT, 1, (LPARAM)&r); 
+
+
+hProgressBar = CreateWindowEx(0, PROGRESS_CLASS, NULL, WS_CHILD | WS_VISIBLE,
+			r.left + 3, r.top + 3, r.right - r.left, r.bottom - r.top, 
+	hStatusBar, NULL, GetModuleHandle(NULL), NULL);
