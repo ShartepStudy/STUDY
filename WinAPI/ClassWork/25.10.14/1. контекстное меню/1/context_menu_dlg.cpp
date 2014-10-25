@@ -38,7 +38,7 @@ BOOL CContextMenuDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 	CheckMenuRadioItem(hSubMenu3, ID_GROUP2_BUTTON, ID_GROUP2_CHECKBOX, ID_GROUP2_CHECKBOX, MF_BYCOMMAND);
 	
   paHbm = LoadBitmap(GetModuleHandle(0), MAKEINTRESOURCE(IDB_BITMAP1));
-  SetMenuItemBitmaps(hMenu, ID_PASTE, MF_BYCOMMAND, paHbm, paHbm);
+  SetMenuItemBitmaps(hMenu, ID_GROUP1_BUTTON, MF_BYCOMMAND, paHbm, paHbm);
 
   return TRUE;
 }

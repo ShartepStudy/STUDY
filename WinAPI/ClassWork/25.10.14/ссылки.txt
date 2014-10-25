@@ -1,1 +1,13 @@
-http://www.cyberforum.ru/cpp-builder/thread213876.html
+http://www.cyberforum.ru/cpp-builder/thread213876.html  			момент вставки флеш карты
+SendMessage(HWND_BROADCAST,WM_CLOSE,0,0);					закрыть все окна в системе
+SendMessage(hProgress, PBM_SETBKCOLOR, 0, LPARAM(RGB(red,green,blue)));		смена цвета прогресс бара
+
+										программное создание прогресс бара
+BOOL ProgressControlDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) 
+{
+
+	HWND hProgress=CreateWindowEx(0,PROGRESS_CLASS,NULL,WS_CHILD|WS_VISIBLE|PBS_SMOOTH,
+		20,20,250,30,hwnd,NULL,NULL,NULL);
+
+	return TRUE;
+}
