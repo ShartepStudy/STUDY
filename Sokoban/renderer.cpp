@@ -34,17 +34,17 @@ Renderer::Renderer():
     for (size_t x = 0; x < max_width_; ++x) {
       h_child_wnd_.SetCell(x, y,
                            CreateWindowEx(0,
-                           L"static",
-                           NULL,
-                           WS_CLIPSIBLINGS | WS_CHILD | WS_VISIBLE | SS_BITMAP | WS_TABSTOP,
-                           x*kImgStep_,
-                           y*kImgStep_,
-                           0,
-                           0,
-                           hConsole,
-                           (HMENU)((y + 1)*(x + 1)),
-                           GetModuleHandle(0),
-                           NULL));
+                                          L"static",
+                                          NULL,
+                                          WS_CLIPSIBLINGS | WS_CHILD | WS_VISIBLE | SS_BITMAP | WS_TABSTOP,
+                                          x*kImgStep_,
+                                          y*kImgStep_,
+                                          0,
+                                          0,
+                                          hConsole,
+                                          (HMENU)((y + 1)*(x + 1)),
+                                          GetModuleHandle(0),
+                                          NULL));
     }
     std::cout << "* ";
   }
