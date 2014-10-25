@@ -11,23 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2F4B7EF9-0B6E-4E34-AFE1-96871CC4ED8F}</ProjectGuid>
+    <ProjectGuid>{B002609D-F661-4B27-9472-8F9C256F040C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Sokoban</RootNamespace>
+    <RootNamespace>My1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -51,10 +51,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -66,46 +66,29 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="command.cpp" />
-    <ClCompile Include="game_pole.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="map_creator.cpp" />
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="sokoban_app.cpp" />
+    <ClCompile Include="menu_bar.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="button_code.h" />
-    <ClInclude Include="command.h" />
-    <ClInclude Include="command_down.h" />
-    <ClInclude Include="command_left.h" />
-    <ClInclude Include="command_right.h" />
-    <ClInclude Include="command_up.h" />
-    <ClInclude Include="game_pole.h" />
-    <ClInclude Include="macros.h" />
-    <ClInclude Include="map_creator.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="sokoban_app.h" />
-    <ClInclude Include="sokoban_exception.h" />
+    <ClInclude Include="header.h" />
+    <ClInclude Include="menu_dlg.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="1.bmp" />
-    <Image Include="2.bmp" />
-    <Image Include="3.bmp" />
-    <Image Include="4.bmp" />
-    <Image Include="5.bmp" />
-    <Image Include="6.bmp" />
-    <Image Include="Debug\0.bmp" />
-    <Image Include="Debug\7.bmp" />
+    <ResourceCompile Include="1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="users.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
