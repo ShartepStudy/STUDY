@@ -2,6 +2,8 @@
 
 CMenuBarDlg* CMenuBarDlg::ptr = NULL;
 
+static HBITMAP paHbm;
+
 CMenuBarDlg::CMenuBarDlg(void)
 {
 	ptr = this;
@@ -22,6 +24,10 @@ BOOL CMenuBarDlg::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 	HMENU hMenu = LoadMenu(GetModuleHandle(0), MAKEINTRESOURCE(IDR_MENU2));
 	// присоединение меню к главному окну приложения
 	SetMenu(hDialog, hMenu);
+
+  paHbm = LoadBitmap(GetModuleHandle(0), MAKEINTRESOURCE(IDB_BITMAP1));
+  SetMenuItemBitmaps(hMenu, ID_PASTE, MF_BYCOMMAND, paHbm, paHbm);
+
 	return TRUE;
 }
 

@@ -1,0 +1,5 @@
+MessageBeep(MB_ICONHAND);
+
+#define MB_ICONHAND                 0x00000010L
+#define MB_ICONEXCLAMATION          0x00000030L
+#define MB_ICONASTERISK             0x00000040L
