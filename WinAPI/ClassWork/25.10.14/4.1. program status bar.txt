@@ -1,0 +1,4 @@
+
+HWND hStatusBar = CreateWindowEx( 0, STATUSCLASSNAME, 0, 
+	WS_CHILD | WS_VISIBLE | SBT_TOOLTIPS | CCS_BOTTOM | SBARS_SIZEGRIP,
+	0, 0, 0, 0, hDialog, HMENU(WM_USER), GetModuleHandle(NULL), 0);
