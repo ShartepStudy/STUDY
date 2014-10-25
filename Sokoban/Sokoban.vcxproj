@@ -77,21 +77,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="command.cpp" />
-    <ClCompile Include="command_free.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="game_pole.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map_creator.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="sokoban_app.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="button_code.h" />
     <ClInclude Include="command.h" />
     <ClInclude Include="command_down.h" />
-    <ClInclude Include="command_free.h" />
     <ClInclude Include="command_left.h" />
     <ClInclude Include="command_right.h" />
     <ClInclude Include="command_up.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="game_pole.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="map_creator.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="sokoban_app.h" />
     <ClInclude Include="sokoban_exception.h" />
@@ -103,6 +106,8 @@
     <Image Include="4.bmp" />
     <Image Include="5.bmp" />
     <Image Include="6.bmp" />
+    <Image Include="Debug\0.bmp" />
+    <Image Include="Debug\7.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,14 +6,14 @@
 namespace sokoban {
 
 class CommandLeft: public Command {
-public:
-  CommandLeft(): Command(-1, 0) {}
+ public:
+  CommandLeft(): Command() {}
   virtual ~CommandLeft() {}
 
-  //virtual bool Execute() { return ExecuteHelper(); }
-  //virtual bool UnExecute() { return UnExecuteHelper(); }
+  virtual bool Execute() { return ExecuteHelper(-1, 0); }
+  virtual bool UnExecute() { return UnExecuteHelper(-1, 0); }
 };
 
-}               //    namespace sokoban
+} //  namespace sokoban
 
-#endif          //    COMMAND_LEFT_H
+#endif //  COMMAND_LEFT_H

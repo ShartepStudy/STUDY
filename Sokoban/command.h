@@ -8,37 +8,32 @@
 
 namespace sokoban {
 
-class CommandHelper {
-public:
-  virtual bool ExecuteHelper(GamePole* game_pole, int dx, int dy) = 0;
-  virtual bool UnExecuteHelper(GamePole* game_pole, int x, int y) = 0;
-};
-
 class Command {
 public:
-  Command(int dx, int dy);
+  Command();
   virtual ~Command() {}
   
-  bool Execute() { return command_helper_->ExecuteHelper(game_pole_, dx_, dy_); }
-  bool UnExecute() { return command_helper_->UnExecuteHelper(game_pole_, x_, y_); }
+  virtual bool Execute() = 0;
+  virtual bool UnExecute() = 0;
 
-  static bool SetGamePole(GamePole* game_pole);
+  static void SetGamePole(GamePole<CellType>* base_map, GamePole<CellType>* objects_map);
 
 protected:
-  int x_;
-  int y_;
+  bool ExecuteHelper(int dx, int dy);
+  bool UnExecuteHelper(int dx, int dy);
 
-  int dx_;
-  int dy_;
+  static GamePole<CellType>* base_map_;
+  static GamePole<CellType>* objects_map_;
+
+  size_t x_;
+  size_t y_;
+
+  bool with_box_;
 
 private:
-  static GamePole* game_pole_;
-
-  std::shared_ptr<CommandHelper> command_helper_;
-
   DISALLOW_ASSIGN(Command);
 };
 
-}   // namespace sokoban
+} //  namespace sokoban
 
-#endif    //  COMMAND_H
+#endif //  COMMAND_H

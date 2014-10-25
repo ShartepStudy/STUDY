@@ -1,85 +1,51 @@
 #include "sokoban_app.h"
 
 #include <conio.h>
+#include <iostream>
 
-#include "command.h"
-#include "command_down.h"
-#include "command_left.h"
-#include "command_right.h"
-#include "command_up.h"
+#include "button_code.h"
 
 namespace sokoban {
 
 SokobanApp::SokobanApp():
-    game_pole_(),
-    renderer_(game_pole_),
-    undo_commands_(),
-    redo_commands_()
-{
-  Command::SetGamePole(&game_pole_);
-}
+    renderer_()
+{}
 
 void SokobanApp::Run() {
-  game_pole_.Init("level_6.dat"); 
-  //game_pole_.DefaultInit();
-  //game_pole_.Save("level_6.dat");
+  bool is_finish = false;
+
   do {
-    renderer_.Show();
+    system("cls");
 
-    std::shared_ptr<Command> command;
-    
-    int btnCode = getch();
-    if (EXTENDED_BUTTONS == btnCode) {
-      btnCode = getch();
+    size_t menu_number;
+    std::cout << "\n\n\t\t1. Play Game.\n\n\t\t2. Create Map. \n\n\t\t3. Exit.\n\n\t\tEnter your choice: ";
+    std::cin >> menu_number;
+    getchar();
+
+    if (1 == menu_number) {
+      int level_number = 0;
+      std::string file_name("level-");
+      std::cout << "\n\n\t\tEnter level number: ";
+      std::cin >> level_number;
+      getchar();
+      system("cls");
+
+      file_name += std::to_string(level_number) + ".map";
+      
+      Game game(&renderer_);
+      game.Init(file_name);
+      game.Run();
+    } else if (2 == menu_number) {
+      MapCreator map_creator(&renderer_);
+      map_creator.Run();
+    } else if (3 == menu_number) {
+      is_finish = true;
+    } else {
+      std::cout << "\n\n\t\tWrong menu number! Try again.";
+      Sleep(2000);
     }
-
-    switch (btnCode) {
-    case UP_BUTTON: 
-      command.reset(new CommandUp);
-      UndoHelper(command);
-      break;
-    case DOWN_BUTTON: 
-      command.reset(new CommandDown);
-      UndoHelper(command);
-      break;
-    case LEFT_BUTTON: 
-      command.reset(new CommandLeft);
-      UndoHelper(command);
-      break;
-    case RIGHT_BUTTON: 
-      command.reset(new CommandRight);
-      UndoHelper(command);
-      break;
-    case U_BUTTON:
-    case u_BUTTON:
-      if (!undo_commands_.empty()) {
-        command = undo_commands_.top();
-        undo_commands_.pop();
-        command->UnExecute();
-        redo_commands_.push(command);
-      }
-      break;
-    case R_BUTTON:
-    case r_BUTTON:
-      if (!redo_commands_.empty()) {
-        command = redo_commands_.top();
-        redo_commands_.pop();
-        command->Execute();
-        undo_commands_.push(command);
-      }
-      break;
-    }
-
-  } while(true);
+  } while (!is_finish);
+  std::cout << "\n\n\n\n\n\n\n\n";
 }
 
-void SokobanApp::UndoHelper(std::shared_ptr<Command>& command) {
-  if (command->Execute()) {
-    undo_commands_.push(command);
-    if (!redo_commands_.empty()) {
-      redo_commands_ = std::stack<std::shared_ptr<Command> >();
-    }
-  }
-}
-
-}   // namespace sokoban
+} //  namespace sokoban

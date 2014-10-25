@@ -20,6 +20,12 @@ private:
   std::string error_data_;
 };
 
+class SaveFileException: SokobanException {
+public:
+  SaveFileException(std::string error_place, std::string file_name):
+    SokobanException(error_place + "  Error!  Can't save file " + file_name) {}
+};
+
 class OpenInputFileException: SokobanException {
 public:
   OpenInputFileException(std::string error_place, std::string file_name):
@@ -45,6 +51,12 @@ public:
     SokobanException(error_place + "  Error!  GamePole not initialize yet, you should call game_pole.Init()") {}
 };
 
-}           //    namespace sokoban
+class NullPointerException: SokobanException {
+public:
+  NullPointerException(std::string error_place):
+    SokobanException(error_place + "  Error! You try to use null pointer!") {}
+};
 
-#endif      //    SOKOBAN_EXCEPTION_H
+} //  namespace sokoban
+
+#endif //  SOKOBAN_EXCEPTION_H

@@ -1,55 +1,73 @@
 #include "command.h"
+#include "sokoban_exception.h"
 
 namespace sokoban {
 
-class CommandHelperFree: CommandHelper {
-  virtual bool ExecuteHelper(GamePole* game_pole, int dx, int dy) {
-    int x = game_pole->X();
-    int y = game_pole->Y();
-    game_pole->SetCell(x + dx, y + dy, PLAYER);
-  }
+GamePole<CellType>* Command::base_map_ = NULL;
+GamePole<CellType>* Command::objects_map_ = NULL;
 
-  virtual bool UnExecuteHelper(GamePole* game_pole, int x, int y) {
-    int x = game_pole->X();
-    int y = game_pole->Y();
-
-
-    if (FREE == game_pole->GetCell(x, y)) {
-      game_pole->SetCell(x, y, PLAYER);
-    } else if (BOX_PLACE == game_pole->GetCell(x, y)) {
-      game_pole->SetCell(x, y, PLAYER_ON_BOX_PLACE);
-    }
-  }
-};
-
-GamePole* Command::game_pole_ = NULL;
-
-Command::Command(int dx, int dy): dx_(dx), dy_(dy) {
-  if (game_pole_) {
-    x_ = game_pole_->X();
-    y_ = game_pole_->Y();
-  }
-
-  switch (game_pole_->GetCell(x_ + dx_, y_ + dy_)) {
-  case FREE: command_helper_.reset(new CommandHelperFree()); break;
-  case BOX_PLACE: command_helper_.reset(new CommandHelperBoxPlace()); break;
-  case BOX:
-    CellType ct = game_pole_->GetCell(x_ + 2 * dx_, y_ + 2 * dy_);
-    if (FREE == ct) {
-      command_helper_.reset(new CommandHelperFreeAfterBox());
-    } else if (BOX_PLACE == ct) {
-      command_helper_.reset(new CommandHelperBoxPlaceAfterBox());
-    }
-    break;
+Command::Command(): 
+    x_(0),
+    y_(0),
+    with_box_(false)
+{
+  if (objects_map_) {
+    x_ = objects_map_->X();
+    y_ = objects_map_->Y();
   }
 }
 
-//static 
-bool Command::SetGamePole(GamePole* game_pole) {
-  if (game_pole) {
-    game_pole_ = game_pole;
+bool Command::ExecuteHelper(int dx, int dy) {
+  bool result = false;
+  if (BOX == objects_map_->GetCell(x_ + dx, y_ + dy)) {
+    CellType ct = base_map_->GetCell(x_ + 2 * dx, y_ + 2 * dy);
+    if (EMPTY == objects_map_->GetCell(x_ + 2*dx, y_ + 2*dy) && 
+        (FREE == ct || BOX_PLACE == ct)) {
+      with_box_ = true;
+      objects_map_->SetCell(x_ + 2 * dx, y_ + 2 * dy, BOX);
+      result = true;
+    } 
+  } else {
+    CellType ct = base_map_->GetCell(x_ + dx, y_ + dy);
+    result = (FREE == ct || BOX_PLACE == ct); 
   }
-  return game_pole;
+
+  if (result) {
+    objects_map_->SetCell(x_ + dx, y_ + dy, PLAYER);
+    objects_map_->SetCell(x_, y_, EMPTY);
+    objects_map_->SetXY(x_ + dx, y_ + dy);
+  }
+
+  return result;
+}
+
+bool Command::UnExecuteHelper(int dx, int dy) {
+  bool result = false;
+  if (with_box_) {
+    objects_map_->SetCell(x_ + dx, y_ + dy, BOX);
+    objects_map_->SetCell(x_ + 2 * dx, y_ + 2 * dy, EMPTY);
+    result = true;
+  } else {
+    objects_map_->SetCell(x_ + dx, y_ + dy, EMPTY);
+    result = true;
+  }
+
+  if (result) {
+    objects_map_->SetCell(x_, y_, PLAYER);
+    objects_map_->SetXY(x_, y_);
+  }
+
+  return result;
+}
+
+//static 
+void Command::SetGamePole(GamePole<CellType>* base_map, GamePole<CellType>* objects_map) {
+  if (base_map && objects_map) {
+    base_map_ = base_map;
+    objects_map_ = objects_map;
+  } else {
+    throw NullPointerException("Command::SetGamePole");
+  }
 }
 
 }      // namespace sokoban

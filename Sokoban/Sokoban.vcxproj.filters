@@ -18,19 +18,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sokoban_app.cpp">
+    <ClCompile Include="renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="command.cpp">
+    <ClCompile Include="sokoban_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game_pole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="renderer.cpp">
+    <ClCompile Include="command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="command_free.cpp">
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_creator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +68,13 @@
     <ClInclude Include="command_right.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="command_free.h">
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map_creator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="button_code.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,6 +95,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Debug\0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Debug\7.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

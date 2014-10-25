@@ -6,12 +6,12 @@
 namespace sokoban {
 
 class CommandRight: public Command {
-public:
-  CommandRight(): Command(1,0) {}
+ public:
+  CommandRight(): Command() {}
   virtual ~CommandRight() {}
 
-  //virtual bool Execute() { return ExecuteHelper(); }
-  //virtual bool UnExecute() { return UnExecuteHelper(); }
+  virtual bool Execute() { return ExecuteHelper(1, 0); }
+  virtual bool UnExecute() { return UnExecuteHelper(1, 0); }
 };
 
 }               //    namespace sokoban
