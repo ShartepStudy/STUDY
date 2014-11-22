@@ -1,0 +1,3 @@
+http://stackoverflow.com/questions/62503/c-int-or-int32-should-i-care
+
+http://msdn.microsoft.com/en-us/library/ya5y69ds.aspx
