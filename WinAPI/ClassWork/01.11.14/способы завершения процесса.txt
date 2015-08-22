@@ -1,0 +1,7 @@
+http://www.experts-exchange.com/Programming/Languages/Visual_Basic/Q_22012335.html
+
+процесс будет завершЄн в следующих случа€х:
+
+Х	входна€ функци€ первичного потока возвращает управление (рекомендуемый способ);
+Х	поток процесса вызывает функцию API ExitProcess;
+Х	поток другого процесса вызывает функцию API TerminateProcess.

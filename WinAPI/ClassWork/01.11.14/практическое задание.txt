@@ -1,0 +1,127 @@
+Разработать приложение, в котором создаются два вторичных потока WriteToFiles и ReadFromFiles. Поток WriteToFiles
+открывает на чтение исходный текстовый файл и создает N копий этого файла. Поток ReadFromFiles копирует содержимое
+всех N копий в результирующий текстовый файл.  
+
+При  параллельной  работе  обоих  потоков,  поток ReadFromFiles  не  должен  опережать в работе поток WriteToFiles,
+т.е. энная копия, не будучи созданной потоком WriteToFiles, не может быть открыта на чтение потоком ReadFromFiles. 
+Для синхронизации работы потоков необходимо использовать механизм критических секций.
+
+
+
+
+#include <windows.h>
+#include <windowsX.h>
+#include <tchar.h>
+#include <time.h>
+#include "resource.h"
+#include <commctrl.h>
+#include <fstream>
+
+#pragma comment(lib,"comctl32") // для общих элементов управления!
+
+using namespace std;
+
+HINSTANCE hInst;
+
+BOOL CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM);
+DWORD WINAPI WriteToFiles (LPVOID lp);
+DWORD WINAPI ReadFromFiles (LPVOID lp);
+
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, 
+			LPTSTR lpszCmdLine, int nCmdShow)
+{
+	hInst = hInstance;
+	return DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, DlgProc); 
+}
+
+HWND hEdit;
+CRITICAL_SECTION cs;
+int numbersInFile = 100;
+
+BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch(message)
+	{
+	case WM_INITDIALOG:
+		srand(time(0));
+		InitializeCriticalSection(&cs);
+		hEdit = GetDlgItem(hWnd, IDC_EDIT1);
+		return TRUE;
+
+	case WM_COMMAND:
+		if(LOWORD(wParam) == IDC_CREATE)
+		{
+			char str[10000];
+			GetWindowText(hEdit, str, 10000);
+			int count = atoi(str);
+			if(count < 1)
+			{
+				MessageBox(hWnd, "Количество файлов меньше 1", "Ошибка", MB_OK | MB_ICONSTOP);
+				return 0;
+			}
+			WriteToFiles((LPVOID)count);
+			ReadFromFiles((LPVOID)count);
+			
+		}
+		return TRUE;
+	case WM_CLOSE:
+		EndDialog(hWnd, 0);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+DWORD WINAPI WriteToFiles (LPVOID lp)
+{
+	EnterCriticalSection(&cs);
+	ofstream out(TEXT("1.txt"));
+	int n;
+	for(int i = 0; i < 100; i++)
+	{
+		n = rand()%50;
+		out << n << ' ';
+	}
+	out.close();
+
+	int count = (int)lp;
+	char path[100];
+	for(int i = 2; i <= count; ++i)
+	{
+		wsprintf(path, "%d.txt", i);
+		ofstream out(path);
+
+		ifstream in(TEXT("1.txt"));
+		int r;
+		for(int i = 0; i < numbersInFile; i++)
+		{
+			in >> r;
+			out << r << ' ';
+		}
+		out.close();
+	}
+	LeaveCriticalSection(&cs);
+	return 0;
+}
+
+DWORD WINAPI ReadFromFiles (LPVOID lp)
+{
+	EnterCriticalSection(&cs);
+	ofstream out("final.txt");
+	int count = (int)lp;
+	char path[100];
+	for(int i = 1; i <= count; ++i)
+	{
+		wsprintf(path, "%d.txt", i);
+
+		ifstream in(path);
+		int r;
+		for(int i = 0; i < numbersInFile; i++)
+		{
+			in >> r;
+			out << r << ' ';
+		}
+		in.close();
+	}
+	LeaveCriticalSection(&cs);
+	return 0;
+}

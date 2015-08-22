@@ -1,0 +1,64 @@
+#include <windows.h>
+#include "resource.h"
+#include <tlhelp32.h>
+#include <windows.h>
+
+#pragma comment(lib,"Kernel32")
+
+BOOL CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM);
+
+HANDLE hProcessSnap;
+HANDLE hProcess;
+PROCESSENTRY32 pe32;
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpszCmdLine, int nCmdShow)
+{
+	// главное окно приложения на основе модального диалога
+	return DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, DlgProc); 
+}
+
+BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
+{
+	switch(message)
+	{
+	case WM_CLOSE: 
+		EndDialog(hWnd, 0);
+		return 1;
+
+	case WM_INITDIALOG:
+		hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
+		if( hProcessSnap == INVALID_HANDLE_VALUE )
+		{
+			MessageBox(0,TEXT("1"),TEXT("INVALID_HANDLE_VALUE"),0);
+			return 0;
+		}
+
+		// Set the size of the structure before using it.
+		pe32.dwSize = sizeof( PROCESSENTRY32 );
+
+		// Retrieve information about the first process,
+		// and exit if unsuccessful
+		if( !Process32First( hProcessSnap, &pe32 ) )
+		{
+			MessageBox(0,TEXT("2"),TEXT("Process32First"),0); // show cause of failure
+
+			CloseHandle( hProcessSnap );          // clean the snapshot object
+			return 0;
+		}
+
+		// Now walk the snapshot of processes, and
+		// display information about each process in turn
+		do
+		{
+			wchar_t*str=new wchar_t[200];
+			wsprintf(str,L"%d",pe32.th32ProcessID);
+			MessageBox(0,pe32.szExeFile,str,0); // show process name and id
+
+			
+
+		} while( Process32Next( hProcessSnap, &pe32 ) );
+
+		return 1;
+	}
+	return 0;
+}

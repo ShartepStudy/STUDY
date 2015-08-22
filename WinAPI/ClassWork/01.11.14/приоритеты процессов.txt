@@ -1,0 +1,24 @@
+Для изменения класса приоритета процесса во время работы  приложения может применяться
+функция SetPriorityClass. 
+
+BOOL SetPriorityClass(
+        HANDLE hProcess, // дескриптор процесса
+        DWORD dwPriorityClass // класс приоритета процесса
+);
+
+Второй параметр может принимать следующие значения:
+
+Класс приоритета процесса	Базовый уровень приоритета	Значение параметра
+
+Idle				4				IDLE_PRIORITY_CLASS
+Below normal			6				BELOW_NORMAL_PRIORITY_CLASS
+Normal				8				NORMAL_PRIORITY_CLASS
+Above normal			10				ABOVE_NORMAL_PRIORITY_CLASS
+High				13				HIGH_PRIORITY_CLASS
+Realtime			24				REALTIME_PRIORITY_CLASS
+
+Для получения класса приоритета процесса используется функция API GetPriorityClass.
+
+DWORD GetPriorityClass(
+        HANDLE hProcess, // дескриптор процесса
+);
